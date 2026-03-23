@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Encyclopedia - Grow Your Crops India</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body style="padding-top: 80px;">
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-leaf"></i>
+                <span>GrowYourCrops<span class="highlight">India</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="encyclopedia.html" class="active">Crop Encyclopedia</a></li>
+                <li><a href="recommendation.html">AI Recommendation</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="auth.html" class="btn btn-outline">Sign In</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="container section-header" style="margin-top: 3rem; margin-bottom: 2rem;">
+        <span class="badge" style="margin-bottom: 1rem;"><i class="fa-solid fa-book-open"></i> Explore 200+ Crops</span>
+        <h2>Indian Crop <span class="highlight">Encyclopedia</span></h2>
+        <p>A comprehensive guide to cultivation practices, soil requirements, and climate suitability for crops across the Indian subcontinent.</p>
+    </div>
+
+    <main class="container">
+        <!-- Filters -->
+        <div class="filter-bar animate-fade-in delay-1">
+            <div class="filter-group">
+                <label for="search-filter"><i class="fa-solid fa-magnifying-glass"></i> Search</label>
+                <input type="text" id="search-filter" placeholder="e.g. Wheat..." style="width: 100%; padding: 0.65rem; border: 1px solid var(--border-color); border-radius: 0.5rem; font-family: inherit;">
+            </div>
+
+            <div class="filter-group">
+                <label for="season-filter"><i class="fa-solid fa-cloud-sun"></i> Season</label>
+                <select id="season-filter">
+                    <option value="all">All Seasons</option>
+                    <option value="Kharif">Kharif (Monsoon)</option>
+                    <option value="Rabi">Rabi (Winter)</option>
+                    <option value="Zaid">Zaid (Summer)</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="soil-filter"><i class="fa-solid fa-mound"></i> Soil Type</label>
+                <select id="soil-filter">
+                    <option value="all">All Soils</option>
+                    <option value="Alluvial">Alluvial</option>
+                    <option value="Black">Black Soil</option>
+                    <option value="Red">Red Soil</option>
+                    <option value="Laterite">Laterite</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="region-filter"><i class="fa-solid fa-map-location"></i> Region</label>
+                <select id="region-filter">
+                    <option value="all">All Regions</option>
+                    <option value="North">North India</option>
+                    <option value="South">South India</option>
+                    <option value="East">East India</option>
+                    <option value="West">West India</option>
+                    <option value="Central">Central India</option>
+                </select>
+            </div>
+            
+            <div class="filter-group" style="display: flex; align-items: flex-end; padding-bottom: 2px;">
+                <button id="apply-filters" class="btn btn-primary btn-block">
+                    <i class="fa-solid fa-filter"></i> Apply Filters
+                </button>
+            </div>
+        </div>
+
+        <!-- Crop Grid -->
+        <div class="card-grid animate-fade-in delay-2" id="crops-grid" style="margin-bottom: 4rem;">
+            <!-- Crop Card 1 -->
+            <div class="card crop-card" data-season="Kharif" data-soil="Alluvial" data-region="All">
+                <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rice/Paddy" class="card-img">
+                <div class="card-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h3 class="card-title" style="margin: 0;">Rice (Paddy)</h3>
+                        <span class="badge">Kharif</span>
+                    </div>
+                    <p class="card-text">Requires high temperature (above 25°C) and high humidity with annual rainfall above 100 cm.</p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <span style="font-size: 0.75rem; background: var(--bg-color); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-color);">Alluvial Soil</span>
+                        <span style="font-size: 0.75rem; background: var(--bg-color); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-color);">High Water</span>
+                    </div>
+                    <a href="#" class="btn btn-outline btn-block" style="padding: 0.5rem;">View Full Guide</a>
+                </div>
+            </div>
+
+            <!-- Crop Card 2 -->
+            <div class="card crop-card" data-season="Rabi" data-soil="Alluvial" data-region="North">
+                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wheat" class="card-img">
+                <div class="card-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h3 class="card-title" style="margin: 0;">Wheat</h3>
+                        <span class="badge" style="background: #e0f2fe; color: #0284c7;">Rabi</span>
+                    </div>
+                    <p class="card-text">Requires cool growing season and bright sunshine at the time of ripening. Ideal rainfall 50-75 cm.</p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <span style="font-size: 0.75rem; background: var(--bg-color); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-color);">Loamy Soil</span>
+                        <span style="font-size: 0.75rem; background: var(--bg-color); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-color);">North India</span>
+                    </div>
+                    <a href="#" class="btn btn-outline btn-block" style="padding: 0.5rem;">View Full Guide</a>
+                </div>
+            </div>
+
+            <!-- Crop Card 3 -->
+            <div class="card crop-card" data-season="Kharif" data-soil="Black" data-region="West">
+                <img src="https://images.unsplash.com/photo-1537243292452-f4728d844cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cotton" class="card-img">
+                <div class="card-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h3 class="card-title" style="margin: 0;">Cotton</h3>
+                        <span class="badge">Kharif</span>
+                    </div>
+                    <p class="card-text">Grows well in the drier parts of black cotton soil of the Deccan plateau. Needs 210 frost-free days.</p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <span style="font-size: 0.75rem; background: var(--bg-color); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-color);">Black Soil</span>
+                        <span style="font-size: 0.75rem; background: var(--bg-color); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-color);">High Temp</span>
+                    </div>
+                    <a href="#" class="btn btn-outline btn-block" style="padding: 0.5rem;">View Full Guide</a>
+                </div>
+            </div>
+            
+            <!-- Crop Card 4 -->
+            <div class="card crop-card" data-season="All" data-soil="Red" data-region="South">
+                <img src="https://images.unsplash.com/photo-1520699049698-acd2fce146c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Coffee" class="card-img">
+                <div class="card-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h3 class="card-title" style="margin: 0;">Coffee</h3>
+                        <span class="badge" style="background: #fef08a; color: #854d0e;">Plantation</span>
+                    </div>
+                    <p class="card-text">Requires hot and humid climate with temperatures between 15°C and 28°C and rainfall from 150-250 cm.</p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <span style="font-size: 0.75rem; background: var(--bg-color); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-color);">Hill Slopes</span>
+                        <span style="font-size: 0.75rem; background: var(--bg-color); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-color);">South India</span>
+                    </div>
+                    <a href="#" class="btn btn-outline btn-block" style="padding: 0.5rem;">View Full Guide</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 Grow Your Crops India. Architecture powered by PHP & Python.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Simple filter logic
+        const applyFilters = () => {
+             const search = document.getElementById('search-filter').value.toLowerCase();
+             const season = document.getElementById('season-filter').value;
+             const soil = document.getElementById('soil-filter').value;
+             const region = document.getElementById('region-filter').value;
+             
+             const cards = document.querySelectorAll('.crop-card');
+             cards.forEach(card => {
+                 const title = card.querySelector('.card-title').innerText.toLowerCase();
+                 const dataset = card.dataset;
+                 
+                 const matchSearch = search === '' || title.includes(search);
+                 const matchSeason = season === 'all' || dataset.season === season || dataset.season === 'All';
+                 const matchSoil = soil === 'all' || dataset.soil === soil;
+                 const matchRegion = region === 'all' || dataset.region === region;
+                 
+                 if (matchSearch && matchSeason && matchSoil && matchRegion) {
+                     card.style.display = 'block';
+                 } else {
+                     card.style.display = 'none';
+                 }
+             });
+        };
+
+        document.getElementById('apply-filters').addEventListener('click', applyFilters);
+        
+        // Trigger filter immediately on typing in the search bar
+        document.getElementById('search-filter').addEventListener('input', applyFilters);
+    </script>
+</body>
+</html>

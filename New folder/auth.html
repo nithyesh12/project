@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication - Grow Your Crops India</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    
+    <div class="auth-container">
+        <div class="auth-overlay"></div>
+        
+        <!-- Back button -->
+        <a href="index.html" style="position: absolute; top: 2rem; left: 2rem; z-index: 20; color: white; display: flex; align-items: center; gap: 0.5rem; font-weight: 500;">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+
+        <!-- Global Message Box for Auth -->
+        <div id="auth-message" style="display: none; padding: 1rem; margin-bottom: 1.5rem; border-radius: 0.5rem; text-align: center; font-size: 0.9rem; z-index: 10; position: relative;"></div>
+
+        <!-- Login Form -->
+        <div class="auth-box animate-fade-in" id="login-box">
+            <div class="auth-header">
+                <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 0.5rem;">
+                    <i class="fa-solid fa-leaf"></i>
+                    <span>GrowYourCrops<span class="highlight">India</span></span>
+                </a>
+                <h3 style="margin-bottom: 0;">Welcome Back, Farmer</h3>
+            </div>
+            
+            <div class="auth-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email"><i class="fa-solid fa-envelope"></i> Email Address</label>
+                        <input type="email" id="email" required placeholder="farmer@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
+                        <input type="password" id="password" required placeholder="••••••••">
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                        <label style="margin: 0; cursor: pointer;">
+                            <input type="checkbox" style="width: auto; margin-right: 0.5rem;"> Remember me
+                        </label>
+                        <a href="#" class="auth-link">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" id="login-btn">Sign In</button>
+                </form>
+            </div>
+            <div class="auth-footer">
+                Don't have an account? <span class="auth-link" onclick="toggleAuth('register')">Create one now</span>
+            </div>
+        </div>
+
+        <!-- Register Form (Hidden initially) -->
+        <div class="auth-box animate-fade-in" id="register-box" style="display: none;">
+            <div class="auth-header">
+                <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 0.5rem;">
+                    <i class="fa-solid fa-leaf"></i>
+                    <span>GrowYourCrops<span class="highlight">India</span></span>
+                </a>
+                <h3 style="margin-bottom: 0;">Create Your Free Account</h3>
+            </div>
+            <div class="auth-body">
+                <form id="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fname"><i class="fa-solid fa-user"></i> First Name</label>
+                            <input type="text" id="fname" required placeholder="Ram">
+                        </div>
+                        <div class="form-group">
+                            <label for="lname"><i class="fa-regular fa-user"></i> Last Name</label>
+                            <input type="text" id="lname" required placeholder="Kumar">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email Address</label>
+                        <input type="email" id="reg-email" required placeholder="farmer@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password"><i class="fa-solid fa-lock"></i> Password</label>
+                        <input type="password" id="reg-password" required placeholder="Create a strong password">
+                    </div>
+                    <button type="submit" class="btn btn-secondary btn-block" style="margin-top: 1rem;" id="register-btn">Sign Up <i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+            </div>
+            <div class="auth-footer">
+                Already have an account? <span class="auth-link" onclick="toggleAuth('login')">Sign In here</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAuth(type) {
+            const login = document.getElementById('login-box');
+            const register = document.getElementById('register-box');
+            showMessage('', 'none');
+            
+            if(type === 'register') {
+                login.style.display = 'none';
+                register.style.display = 'block';
+            } else {
+                login.style.display = 'block';
+                register.style.display = 'none';
+            }
+        }
+
+        function showMessage(msg, type) {
+            const msgBox = document.getElementById('auth-message');
+            if(type === 'none') {
+                msgBox.style.display = 'none';
+                return;
+            }
+            msgBox.style.display = 'block';
+            msgBox.innerText = msg;
+            if(type === 'error') {
+                msgBox.style.background = '#fef2f2';
+                msgBox.style.color = '#991b1b';
+                msgBox.style.border = '1px solid #f87171';
+            } else {
+                msgBox.style.background = '#f0fdf4';
+                msgBox.style.color = '#166534';
+                msgBox.style.border = '1px solid #4ade80';
+            }
+        }
+
+        // Login Submit
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('login-btn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Signing In...';
+            btn.disabled = true;
+
+            const payload = {
+                action: 'login',
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+
+            try {
+                const response = await fetch('api/auth.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                if(response.ok) {
+                    showMessage('Login successful! Redirecting...', 'success');
+                    setTimeout(() => window.location.href = 'dashboard.html', 1000);
+                } else {
+                    showMessage(data.message || 'Login failed', 'error');
+                    btn.innerHTML = 'Sign In';
+                    btn.disabled = false;
+                }
+            } catch(err) {
+                showMessage('Network error.', 'error');
+                btn.innerHTML = 'Sign In';
+                btn.disabled = false;
+            }
+        });
+
+        // Register Submit
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('register-btn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating Account...';
+            btn.disabled = true;
+
+            const payload = {
+                action: 'register',
+                first_name: document.getElementById('fname').value,
+                last_name: document.getElementById('lname').value,
+                email: document.getElementById('reg-email').value,
+                password: document.getElementById('reg-password').value
+            };
+
+            try {
+                const response = await fetch('api/auth.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                if(response.ok) {
+                    showMessage('Account created! Please sign in.', 'success');
+                    setTimeout(() => toggleAuth('login'), 1500);
+                } else {
+                    showMessage(data.message || 'Registration failed', 'error');
+                }
+            } catch(err) {
+                showMessage('Network error.', 'error');
+            }
+            btn.innerHTML = 'Sign Up <i class="fa-solid fa-arrow-right"></i>';
+            btn.disabled = false;
+        });
+    </script>
+</body>
+</html>

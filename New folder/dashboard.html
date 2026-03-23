@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Dashboard - Grow Your Crops India</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Chart.js for Dashboard Graphics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="background-color: var(--bg-color); padding-top: 80px;">
+    
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-leaf"></i>
+                <span>GrowYourCrops<span class="highlight">India</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="encyclopedia.html">Crop Encyclopedia</a></li>
+                <li><a href="recommendation.html">AI Recommendation</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--border-color); padding: 0.5rem 1rem; border-radius: 9999px;">
+                            <img src="https://ui-avatars.com/api/?name=Indian+Farmer&background=059669&color=fff" alt="Profile" style="width: 24px; height: 24px; border-radius: 50%;">
+                            <span id="nav-name" style="font-weight: 500; font-size: 0.9rem;">Farmer</span>
+                        </div>
+                        <button onclick="logout()" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container" style="padding: 2rem 1.5rem 4rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;" class="animate-fade-in">
+            <div>
+                <h2 style="margin-bottom: 0.5rem;">Welcome back, <span id="welcome-name" class="highlight">Farmer</span>!</h2>
+                <p style="color: var(--text-muted); margin: 0;">Here's what's happening on your farm today.</p>
+            </div>
+            <a href="recommendation.html" class="btn btn-primary"><i class="fa-solid fa-plus"></i> New Analysis</a>
+        </div>
+
+        <!-- KPI Stats Grid -->
+        <div class="stats-grid animate-fade-in delay-1">
+            <div class="stat-card">
+                <i class="fa-solid fa-wheat-awn stat-icon"></i>
+                <div class="stat-info">
+                    <p>Current Crop</p>
+                    <h3>Wheat (Rabi)</h3>
+                </div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #0284c7, #0369a1);">
+                <i class="fa-solid fa-cloud-showers-heavy stat-icon"></i>
+                <div class="stat-info">
+                    <p>Expected Rainfall</p>
+                    <h3>45 mm</h3>
+                </div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                <i class="fa-solid fa-temperature-arrow-up stat-icon"></i>
+                <div class="stat-info">
+                    <p>Avg. Temperature</p>
+                    <h3>24°C</h3>
+                </div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
+                <i class="fa-solid fa-arrow-trend-up stat-icon"></i>
+                <div class="stat-info">
+                    <p>Est. Yield</p>
+                    <h3>+12%</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts and Details -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;" class="animate-fade-in delay-2">
+            
+            <!-- Left Column: Chart & History -->
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+                
+                <!-- Yield Graph -->
+                <div class="glass-panel" style="padding: 1.5rem; background: var(--bg-surface);">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;"><i class="fa-solid fa-chart-area"></i> Historical Yield Analysis (Quintals/Hectare)</h3>
+                    <div style="height: 300px; width: 100%;">
+                        <canvas id="yieldChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Recommendations -->
+                <div class="glass-panel" style="padding: 1.5rem; background: var(--bg-surface);">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;"><i class="fa-solid fa-clock-rotate-left"></i> Recent AI Analyses</h3>
+                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-muted);">
+                                <th style="padding: 1rem 0.5rem; font-weight: 500;">Date</th>
+                                <th style="padding: 1rem 0.5rem; font-weight: 500;">Season</th>
+                                <th style="padding: 1rem 0.5rem; font-weight: 500;">Top Recommendation</th>
+                                <th style="padding: 1rem 0.5rem; font-weight: 500;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="records-table-body">
+                            <!-- Dynamic records will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Right Column: Weather & Advisories -->
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+                
+                <!-- Weather Widget -->
+                <div class="card" style="border: none; background: linear-gradient(to bottom right, #38bdf8, #0284c7); color: white;">
+                    <div class="card-content">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div>
+                                <h4 style="color: white; margin-bottom: 0;">Ludhiana, Punjab</h4>
+                                <p style="opacity: 0.8; font-size: 0.875rem;">March 22, 2026</p>
+                            </div>
+                            <i class="fa-solid fa-cloud-sun" style="font-size: 2.5rem; color: #fef08a;"></i>
+                        </div>
+                        <div style="margin: 1.5rem 0;">
+                            <span style="font-size: 4rem; font-weight: 700; font-family: var(--font-heading); line-height: 1;">28°</span>
+                            <span style="font-size: 1.25rem;">Mostly Sunny</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                            <div style="text-align: center;">
+                                <i class="fa-solid fa-droplet" style="margin-bottom: 0.25rem; opacity: 0.8;"></i>
+                                <div style="font-size: 0.875rem;">62% Hum</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <i class="fa-solid fa-wind" style="margin-bottom: 0.25rem; opacity: 0.8;"></i>
+                                <div style="font-size: 0.875rem;">12 km/h</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <i class="fa-solid fa-umbrella" style="margin-bottom: 0.25rem; opacity: 0.8;"></i>
+                                <div style="font-size: 0.875rem;">10% Rain</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expert Advisory -->
+                <div class="glass-panel" style="padding: 1.5rem; background: var(--bg-surface);">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;"><i class="fa-solid fa-bullhorn"></i> Advisory Alerts</h3>
+                    
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem; padding: 1rem; background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 0.5rem 0.5rem 0;">
+                        <i class="fa-solid fa-bug" style="color: #d97706; font-size: 1.25rem; margin-top: 0.2rem;"></i>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem; font-size: 1rem;">Aphid Threat High</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">Recent humidity spikes favor aphid reproduction. Spray organic neem oil.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; padding: 1rem; background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 0 0.5rem 0.5rem 0;">
+                        <i class="fa-solid fa-flask" style="color: #047857; font-size: 1.25rem; margin-top: 0.2rem;"></i>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem; font-size: 1rem;">Nitrogen Application</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">Optimal window for 2nd urea dose on Wheat crop is within 3 days.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 Grow Your Crops India. Architecture powered by PHP & Python.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Logout function
+        async function logout() {
+            try {
+                await fetch('api/auth.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({action: 'logout'})
+                });
+                window.location.href = 'index.html';
+            } catch(e) {
+                console.error("Logout failed");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check session
+            try {
+                const sessionRes = await fetch('api/auth.php?action=session');
+                if(!sessionRes.ok) {
+                    window.location.href = 'auth.html';
+                    return;
+                }
+                const sessionData = await sessionRes.json();
+                document.getElementById('welcome-name').innerText = sessionData.user.first_name;
+                document.getElementById('nav-name').innerText = sessionData.user.first_name;
+            } catch(e) {
+                console.error("Session check failed");
+            }
+
+            // Fetch records
+            try {
+                const res = await fetch('api/records.php');
+                const data = await res.json();
+                const tbody = document.getElementById('records-table-body');
+                
+                if(data.records && data.records.length > 0) {
+                    data.records.forEach(rec => {
+                        let badgeColor = rec.status === 'Planted' ? 'background: #dcfce7; color: #166534;' : 
+                                        (rec.status === 'Harvested' ? 'background: #f1f5f9; color: #475569;' : 'background: #e0e7ff; color: #3730a3;');
+                        
+                        const date = new Date(rec.created_at).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
+                        
+                        tbody.innerHTML += `
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 1rem 0.5rem;">${date}</td>
+                                <td style="padding: 1rem 0.5rem;">${rec.state}</td>
+                                <td style="padding: 1rem 0.5rem; font-weight: 600; color: var(--primary-dark);">${rec.recommended_crop}</td>
+                                <td style="padding: 1rem 0.5rem;"><span class="badge" style="${badgeColor}">${rec.status}</span></td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">No land records found. Run an analysis to start.</td></tr>';
+                }
+            } catch(e) {
+                console.error("Failed to fetch records:", e);
+            }
+
+            // Initialize Chart.js
+            const ctx = document.getElementById('yieldChart').getContext('2d');
+            const yieldChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2021', '2022', '2023', '2024', '2025 (Projected)'],
+                    datasets: [{
+                        label: 'Historical Yield (q/ha)',
+                        data: [32, 34, 33, 38, 42],
+                        borderColor: '#059669',
+                        backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#ffffff',
+                        pointBorderColor: '#059669',
+                        pointBorderWidth: 2,
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: false, grid: { color: '#e2e8f0', borderDash: [5, 5] } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
