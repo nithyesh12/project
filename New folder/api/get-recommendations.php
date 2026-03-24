@@ -17,16 +17,20 @@ if (
 !empty($data->soil_ph) &&
 !empty($data->rainfall) &&
 !empty($data->temperature) &&
-!empty($data->state)
+!empty($data->state) &&
+isset($data->humidity) &&
+isset($data->nitrogen)
 ) {
     // Sanitize inputs
     $soil_ph = floatval(htmlspecialchars(strip_tags($data->soil_ph)));
     $rainfall = floatval(htmlspecialchars(strip_tags($data->rainfall)));
     $temperature = floatval(htmlspecialchars(strip_tags($data->temperature)));
+    $humidity = floatval(htmlspecialchars(strip_tags($data->humidity)));
+    $nitrogen = floatval(htmlspecialchars(strip_tags($data->nitrogen)));
     $state = htmlspecialchars(strip_tags($data->state));
 
     $pythonClient = new PythonApiClient();
-    $recommendations = $pythonClient->getRecommendations($soil_ph, $rainfall, $temperature, $state);
+    $recommendations = $pythonClient->getRecommendations($soil_ph, $rainfall, $temperature, $humidity, $nitrogen, $state);
 
     if ($recommendations !== null) {
         http_response_code(200);
@@ -39,6 +43,6 @@ if (
 }
 else {
     http_response_code(400);
-    echo json_encode(array("status" => "error", "message" => "Incomplete data. Please provide soil pH, rainfall, temperature, and state."));
+    echo json_encode(array("status" => "error", "message" => "Incomplete data. Please provide soil pH, rainfall, temperature, humidity, nitrogen, and state."));
 }
 ?>
