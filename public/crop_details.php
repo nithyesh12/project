@@ -98,7 +98,7 @@ $is_logged_in = isset($_SESSION['user_id']);
 
                 const html = `
                     <div class="details-header">
-                        <img src="${crop.image}" loading="lazy" alt="${crop.name}">
+                        <img src="${crop.image_url}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=1200&q=80';" loading="lazy" alt="${crop.name}" style="width: 100%; height: 100%; object-fit: cover;">
                         <div class="header-text">
                             <h1>${crop.name}</h1>
                             <p style="font-size: 1.2rem; font-style: italic; opacity: 0.9;">${crop.scientific_name}</p>

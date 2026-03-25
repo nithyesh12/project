@@ -15,7 +15,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Rice/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?rice,farm,agriculture"
     },
     {
         "id": 2,
@@ -33,7 +33,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Rabi crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Wheat/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?wheat,farm,agriculture"
     },
     {
         "id": 3,
@@ -51,7 +51,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Maize/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?maize,farm,agriculture"
     },
     {
         "id": 4,
@@ -69,7 +69,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Jowar/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?jowar,farm,agriculture"
     },
     {
         "id": 5,
@@ -87,7 +87,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Bajra/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?bajra,farm,agriculture"
     },
     {
         "id": 6,
@@ -105,7 +105,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Ragi/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?ragi,farm,agriculture"
     },
     {
         "id": 7,
@@ -123,7 +123,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Rabi crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Barley/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?barley,farm,agriculture"
     },
     {
         "id": 8,
@@ -141,7 +141,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Rabi crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Chickpea/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?chickpea,farm,agriculture"
     },
     {
         "id": 9,
@@ -159,7 +159,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Pigeon%20Pea/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?pigeon,pea,farm,agriculture"
     },
     {
         "id": 10,
@@ -177,7 +177,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Black%20Gram/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?black,gram,farm,agriculture"
     },
     {
         "id": 11,
@@ -195,7 +195,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Green%20Gram/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?green,gram,farm,agriculture"
     },
     {
         "id": 12,
@@ -213,7 +213,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Rabi crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Masoor/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?masoor,farm,agriculture"
     },
     {
         "id": 13,
@@ -231,7 +231,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Soybean/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?soybean,farm,agriculture"
     },
     {
         "id": 14,
@@ -249,7 +249,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Groundnut/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?groundnut,farm,agriculture"
     },
     {
         "id": 15,
@@ -267,7 +267,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Rabi crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Mustard/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?mustard,farm,agriculture"
     },
     {
         "id": 16,
@@ -285,7 +285,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Sunflower/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?sunflower,farm,agriculture"
     },
     {
         "id": 17,
@@ -303,7 +303,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Safflower/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?safflower,farm,agriculture"
     },
     {
         "id": 18,
@@ -321,7 +321,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Sesame/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?sesame,farm,agriculture"
     },
     {
         "id": 19,
@@ -339,7 +339,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Rabi crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Linseed/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?linseed,farm,agriculture"
     },
     {
         "id": 20,
@@ -357,7 +357,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Castor/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?castor,farm,agriculture"
     },
     {
         "id": 21,
@@ -375,7 +375,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Sugarcane/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?sugarcane,farm,agriculture"
     },
     {
         "id": 22,
@@ -393,7 +393,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Cotton/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?cotton,farm,agriculture"
     },
     {
         "id": 23,
@@ -411,7 +411,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Jute/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?jute,farm,agriculture"
     },
     {
         "id": 24,
@@ -429,7 +429,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Tobacco/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?tobacco,farm,agriculture"
     },
     {
         "id": 25,
@@ -447,7 +447,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Tea/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?tea,farm,agriculture"
     },
     {
         "id": 26,
@@ -465,7 +465,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Coffee/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?coffee,farm,agriculture"
     },
     {
         "id": 27,
@@ -483,7 +483,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Rubber/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?rubber,farm,agriculture"
     },
     {
         "id": 28,
@@ -501,7 +501,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Coconut/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?coconut,farm,agriculture"
     },
     {
         "id": 29,
@@ -519,7 +519,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Cashew/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?cashew,farm,agriculture"
     },
     {
         "id": 30,
@@ -537,7 +537,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Arecanut/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?arecanut,farm,agriculture"
     },
     {
         "id": 31,
@@ -555,7 +555,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Black%20Pepper/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?black,pepper,farm,agriculture"
     },
     {
         "id": 32,
@@ -573,7 +573,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Cardamom/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?cardamom,farm,agriculture"
     },
     {
         "id": 33,
@@ -591,7 +591,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Clove/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?clove,farm,agriculture"
     },
     {
         "id": 34,
@@ -609,7 +609,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Turmeric/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?turmeric,farm,agriculture"
     },
     {
         "id": 35,
@@ -627,7 +627,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Ginger/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?ginger,farm,agriculture"
     },
     {
         "id": 36,
@@ -645,7 +645,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Rabi crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Garlic/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?garlic,farm,agriculture"
     },
     {
         "id": 37,
@@ -663,7 +663,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Rabi crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Coriander/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?coriander,farm,agriculture"
     },
     {
         "id": 38,
@@ -681,7 +681,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Cumin/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?cumin,farm,agriculture"
     },
     {
         "id": 39,
@@ -699,7 +699,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Fennel/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?fennel,farm,agriculture"
     },
     {
         "id": 40,
@@ -717,7 +717,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Mango/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?mango,farm,agriculture"
     },
     {
         "id": 41,
@@ -735,7 +735,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Banana/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?banana,farm,agriculture"
     },
     {
         "id": 42,
@@ -753,7 +753,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Citrus/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?citrus,farm,agriculture"
     },
     {
         "id": 43,
@@ -771,7 +771,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Apple/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?apple,farm,agriculture"
     },
     {
         "id": 44,
@@ -789,7 +789,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Papaya/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?papaya,farm,agriculture"
     },
     {
         "id": 45,
@@ -807,7 +807,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Grapes/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?grapes,farm,agriculture"
     },
     {
         "id": 46,
@@ -825,7 +825,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Rabi crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Potato/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?potato,farm,agriculture"
     },
     {
         "id": 47,
@@ -843,7 +843,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Tomato/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?tomato,farm,agriculture"
     },
     {
         "id": 48,
@@ -861,7 +861,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Onion/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?onion,farm,agriculture"
     },
     {
         "id": 49,
@@ -879,7 +879,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Brinjal/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?brinjal,farm,agriculture"
     },
     {
         "id": 50,
@@ -897,7 +897,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Cabbage/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?cabbage,farm,agriculture"
     },
     {
         "id": 51,
@@ -915,6 +915,6 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image": "https://picsum.photos/seed/Cauliflower/400/300"
+        "image_url": "https://source.unsplash.com/400x300/?cauliflower,farm,agriculture"
     }
 ]
