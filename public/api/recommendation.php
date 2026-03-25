@@ -28,6 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once '../../src_php/Services/PythonApiClient.php';
 
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(401);
+    echo json_encode(array("status" => "error", "message" => "Unauthorized access."));
+    exit();
+}
+
 // Decode incoming POST data from frontend
 $data = json_decode(file_get_contents("php://input"));
 

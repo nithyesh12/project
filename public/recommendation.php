@@ -1,3 +1,11 @@
+<?php
+ini_set('session.use_only_cookies', 1);
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: auth.html");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,10 +28,18 @@
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="encyclopedia.html">Crop Encyclopedia</a></li>
-                <li><a href="recommendation.html" class="active">AI Recommendation</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="auth.html" class="btn btn-outline">Sign In</a></li>
+                <li><a href="crops.php">Crop Encyclopedia</a></li>
+                <li><a href="recommendation.php" class="active">AI Recommendation</a></li>
+                <li><a href="dashboard.php">Dashboard</a></li>
+                <li>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--border-color); padding: 0.5rem 1rem; border-radius: 9999px;">
+                            <img src="https://ui-avatars.com/api/?name=User&background=059669&color=fff" id="nav-avatar" alt="Profile" style="width: 24px; height: 24px; border-radius: 50%;">
+                            <span id="nav-name" style="font-weight: 500; font-size: 0.9rem;">Farmer</span>
+                        </div>
+                        <button onclick="logout()" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -198,6 +214,37 @@
 
             btn.innerHTML = '<span>Analyze Land Suitability</span><i class="fa-solid fa-wand-magic-sparkles"></i>';
             btn.disabled = false;
+        });
+        // Logout function
+        async function logout() {
+            try {
+                await fetch('api/auth.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({action: 'logout'})
+                });
+                window.location.href = 'index.html';
+            } catch(e) {
+                console.error("Logout failed");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check session
+            try {
+                const sessionRes = await fetch('api/auth.php?action=session');
+                const sessionData = await sessionRes.json();
+                if(sessionRes.ok) {
+                    if (document.getElementById('nav-name')) {
+                        document.getElementById('nav-name').innerText = sessionData.user.first_name;
+                    }
+                    if (document.getElementById('nav-avatar')) {
+                        document.getElementById('nav-avatar').src = `https://ui-avatars.com/api/?name=${sessionData.user.first_name}&background=059669&color=fff`;
+                    }
+                }
+            } catch(e) {
+                console.error("Session check failed");
+            }
         });
     </script>
 </body>

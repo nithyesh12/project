@@ -4,7 +4,7 @@ namespace Config;
 class Database
 {
     private $host = "localhost";
-    private $db_name = "grow_your_crops_india";
+    private $db_name = "growyourcrops";
     private $username = "root"; // Update in production!
     private $password = ""; // Update in production!
     public $conn;

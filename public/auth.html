@@ -150,7 +150,7 @@
                 const data = await response.json();
                 if(response.ok) {
                     showMessage('Login successful! Redirecting...', 'success');
-                    setTimeout(() => window.location.href = 'dashboard.html', 1000);
+                    setTimeout(() => window.location.href = 'dashboard.php', 1000);
                 } else {
                     showMessage(data.message || 'Login failed', 'error');
                     btn.innerHTML = 'Sign In';

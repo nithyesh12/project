@@ -1,3 +1,26 @@
+<?php
+ini_set('session.use_only_cookies', 1);
+ini_set('session.use_strict_mode', 1);
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'secure' => isset($_SERVER['HTTPS']),
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
+session_start();
+
+// Disable caching to prevent back-button access
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
+// Ensure unauthorized users are redirected
+if (!isset($_SESSION['user_id'])) {
+    header("Location: auth.html");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,9 +47,9 @@
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="encyclopedia.html">Crop Encyclopedia</a></li>
-                <li><a href="recommendation.html">AI Recommendation</a></li>
-                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="crops.php">Crop Encyclopedia</a></li>
+                <li><a href="recommendation.php">AI Recommendation</a></li>
+                <li><a href="dashboard.php" class="active">Dashboard</a></li>
                 <li>
                     <div style="display: flex; align-items: center; gap: 1rem;">
                         <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--border-color); padding: 0.5rem 1rem; border-radius: 9999px;">
@@ -46,7 +69,7 @@
                 <h2 style="margin-bottom: 0.5rem;">Welcome back, <span id="welcome-name" class="highlight">Farmer</span>!</h2>
                 <p style="color: var(--text-muted); margin: 0;">Here's what's happening on your farm today.</p>
             </div>
-            <a href="recommendation.html" class="btn btn-primary"><i class="fa-solid fa-plus"></i> New Analysis</a>
+            <a href="recommendation.php" class="btn btn-primary"><i class="fa-solid fa-plus"></i> New Analysis</a>
         </div>
 
         <!-- KPI Stats Grid -->
@@ -54,29 +77,29 @@
             <div class="stat-card">
                 <i class="fa-solid fa-wheat-awn stat-icon"></i>
                 <div class="stat-info">
-                    <p>Current Crop</p>
-                    <h3>Wheat (Rabi)</h3>
+                    <p>Latest Recommendation</p>
+                    <h3 id="stat-crop">No Data</h3>
                 </div>
             </div>
             <div class="stat-card" style="background: linear-gradient(135deg, #0284c7, #0369a1);">
                 <i class="fa-solid fa-cloud-showers-heavy stat-icon"></i>
                 <div class="stat-info">
-                    <p>Expected Rainfall</p>
-                    <h3>45 mm</h3>
+                    <p>Land Rainfall</p>
+                    <h3 id="stat-rain">-</h3>
                 </div>
             </div>
             <div class="stat-card" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
                 <i class="fa-solid fa-temperature-arrow-up stat-icon"></i>
                 <div class="stat-info">
-                    <p>Avg. Temperature</p>
-                    <h3>24°C</h3>
+                    <p>Land Temperature</p>
+                    <h3 id="stat-temp">-</h3>
                 </div>
             </div>
             <div class="stat-card" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
                 <i class="fa-solid fa-arrow-trend-up stat-icon"></i>
                 <div class="stat-info">
-                    <p>Est. Yield</p>
-                    <h3>+12%</h3>
+                    <p>Analysis Count</p>
+                    <h3 id="stat-count">0</h3>
                 </div>
             </div>
         </div>
@@ -218,6 +241,13 @@
                 const tbody = document.getElementById('records-table-body');
                 
                 if(data.records && data.records.length > 0) {
+                    // Update KPI Cards with the latest record
+                    const latest = data.records[0];
+                    document.getElementById('stat-crop').innerText = latest.recommended_crop;
+                    document.getElementById('stat-rain').innerText = latest.rainfall + ' mm';
+                    document.getElementById('stat-temp').innerText = latest.temperature + '°C';
+                    document.getElementById('stat-count').innerText = data.records.length;
+
                     data.records.forEach(rec => {
                         let badgeColor = rec.status === 'Planted' ? 'background: #dcfce7; color: #166534;' : 
                                         (rec.status === 'Harvested' ? 'background: #f1f5f9; color: #475569;' : 'background: #e0e7ff; color: #3730a3;');
@@ -242,13 +272,21 @@
 
             // Initialize Chart.js
             const ctx = document.getElementById('yieldChart').getContext('2d');
+            
+            // Generate some random visual data based on the latest record, or zero out if none
+            let chartData = [0, 0, 0, 0, 0];
+            let latestTemp = document.getElementById('stat-temp').innerText;
+            if (latestTemp !== "-") {
+                 // Sample visualization
+                 chartData = [20, 25, 22, 30, 35];
+            }
             const yieldChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['2021', '2022', '2023', '2024', '2025 (Projected)'],
                     datasets: [{
                         label: 'Historical Yield (q/ha)',
-                        data: [32, 34, 33, 38, 42],
+                        data: chartData,
                         borderColor: '#059669',
                         backgroundColor: 'rgba(5, 150, 105, 0.1)',
                         borderWidth: 3,

@@ -5,8 +5,31 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
+// Secure session settings
+ini_set('session.use_only_cookies', 1);
+ini_set('session.use_strict_mode', 1);
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'secure' => isset($_SERVER['HTTPS']),
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
+session_start();
+
+// Disable caching to prevent back-button access
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 // Normally we would use an autoloader (like Composer)
 require_once '../../src_php/Services/PythonApiClient.php';
+
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(401);
+    echo json_encode(array("status" => "error", "message" => "Unauthorized access."));
+    exit();
+}
 
 use Services\PythonApiClient;
 
@@ -14,12 +37,13 @@ use Services\PythonApiClient;
 $data = json_decode(file_get_contents("php://input"));
 
 if (
-!empty($data->soil_ph) &&
-!empty($data->rainfall) &&
-!empty($data->temperature) &&
-!empty($data->state) &&
-isset($data->humidity) &&
-isset($data->nitrogen)
+    $data !== null &&
+    !empty($data->soil_ph) &&
+    !empty($data->rainfall) &&
+    !empty($data->temperature) &&
+    !empty($data->state) &&
+    isset($data->humidity) &&
+    isset($data->nitrogen)
 ) {
     // Sanitize inputs
     $soil_ph = floatval(htmlspecialchars(strip_tags($data->soil_ph)));
