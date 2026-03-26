@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             card.onclick = () => window.location.href = `crop_details.php?id=${crop.id}`;
             card.innerHTML = `
                 <div style="position: relative; height: 200px; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; overflow: hidden; background: #e2e8f0;">
-                    <img src="${crop.image_url}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=400&q=80';" loading="lazy" alt="${crop.name}" class="crop-image" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-normal);">
+                    <img src="${crop.image_url}" onerror="this.onerror=null; this.src='assets/images/default_crop.jpg';" loading="lazy" alt="${crop.name}" class="crop-image" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-normal);">
                     <span class="badge" style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.95); padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: bold; font-size: 0.8rem; color: var(--primary-dark); box-shadow: 0 2px 4px rgba(0,0,0,0.1);">${crop.season}</span>
                 </div>
                 <div class="crop-details" style="padding: 1.5rem; border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg); background: var(--bg-surface); display: flex; flex-direction: column; height: 100%;">
