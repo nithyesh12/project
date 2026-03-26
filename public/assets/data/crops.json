@@ -69,7 +69,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image_url": "assets/images/crops/sorghum.jpg"
+        "image_url": "assets/images/crops/sorghum.jpeg"
     },
     {
         "id": 5,
@@ -483,7 +483,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image_url": "assets/images/crops/rubber.jpg"
+        "image_url": "assets/images/crops/rubber.jpeg"
     },
     {
         "id": 28,
@@ -789,7 +789,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Perennial crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image_url": "assets/images/crops/papaya.jpg"
+        "image_url": "assets/images/crops/papaya.jpeg"
     },
     {
         "id": 45,
@@ -897,7 +897,7 @@
         "maturity_days": "90 - 150 Days",
         "suitable_states": "Punjab, UP, MP, Maharashtra, Karnataka, Gujarat, Tamil Nadu, Andhra Pradesh (varies by region)",
         "short_desc": "A highly cultivated Kharif crop known for its massive commercial and nutritional footprint in Indian agriculture.",
-        "image_url": "assets/images/crops/cabbage.jpg"
+        "image_url": "assets/images/crops/cabbage.jpeg"
     },
     {
         "id": 51,
