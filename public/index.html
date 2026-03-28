@@ -10,9 +10,74 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Specific Styles for New Homepage Requirements */
+        .step-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        .step-card {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            background: var(--bg-surface);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-normal);
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        .step-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .step-card i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+        }
+        .feature-card {
+            background: white; 
+            padding: 2.5rem 2rem; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        /* Mobile adjustments */
+        @media screen and (max-width: 768px) {
+            .navbar.scrolled { padding: 1rem 0; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- 2. Navigation Bar -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">
@@ -21,126 +86,250 @@
             </a>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="crops.php">Crop Encyclopedia</a></li>
-                <li><a href="recommendation.php">AI Recommendation</a></li>
+                <li><a href="crops.php">Crops</a></li>
+                <li><a href="recommendation.php">Recommendations</a></li>
                 <li><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="auth.html" class="btn btn-outline">Sign In</a></li>
+                <li id="auth-links">
+                    <a href="auth.html" class="btn btn-outline" id="login-btn">Login/Register</a>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- 3. Hero Section -->
     <header class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content animate-fade-in">
-            <span class="badge" style="margin-bottom: 1rem;"><i class="fa-solid fa-bolt"></i> Next-Gen Agriculture</span>
-            <h1>Cultivate the Future with <br><span class="highlight">Precision Farming</span></h1>
-            <p>Empowering Indian farmers with data-driven insights. Discover the optimal crops for your land, climate, and soil, and maximize your yield organically and sustainably.</p>
-            <div style="display: flex; gap: 1rem;">
-                <a href="recommendation.php" class="btn btn-primary btn-large">
-                    Get AI Recommendations <i class="fa-solid fa-arrow-right"></i>
-                </a>
-                <a href="crops.php" class="btn btn-secondary btn-large">
+        <div class="hero-overlay" style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); z-index:0;"></div>
+        <div class="container hero-content animate-fade-in" style="position:relative; z-index:1;">
+            <span class="badge" style="margin-bottom: 1.5rem;"><i class="fa-solid fa-seedling"></i> Welcome to the Future of Farming</span>
+            <h1>Grow Smart, <br><span class="highlight" style="color:#ffb74d;">Harvest Better</span></h1>
+            <p>Find the best crops based on your soil and climate</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="crops.php" class="btn btn-primary btn-large">
                     <i class="fa-solid fa-book-open"></i> Explore Crops
+                </a>
+                <a href="recommendation.php" class="btn btn-secondary btn-large">
+                    Get Recommendations <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Features Section -->
-    <section class="section" style="background-color: var(--bg-color);">
+    <!-- 4. Features Section -->
+    <section class="section" style="padding: 6rem 0; background-color: var(--bg-main);">
         <div class="container">
-            <div class="section-header animate-fade-in delay-1">
-                <h2>Why Choose <span class="highlight">GrowYourCrops</span>?</h2>
-                <p>We blend advanced machine learning algorithms with vast agricultural databases tailored specifically for the diverse Indian subcontinent.</p>
+            <div class="section-header">
+                <h2>Our <span class="highlight">Features</span></h2>
+                <p style="font-size: 1.1rem; color: var(--text-muted);">Advanced tools designed for the modern Indian farmer</p>
             </div>
-
-            <div class="card-grid">
-                <!-- Feature 1 -->
-                <div class="card p-4 text-center glass-panel">
-                    <div class="card-content">
-                        <i class="fa-solid fa-brain" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1.5rem;"></i>
-                        <h3 class="card-title">AI-Powered Insights</h3>
-                        <p class="card-text">Our Python data engine analyzes soil pH, rainfall, and temperature to recommend the highest yielding crops for your specific region.</p>
-                    </div>
+            <div class="card-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem;">
+                
+                <div class="feature-card text-center">
+                    <i class="fa-solid fa-book" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1.5rem;"></i>
+                    <h3 style="margin-bottom: 1rem;">Crop Encyclopedia</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">Access detailed cultivation guides and parameters for over 50+ Indian crops directly managed by local farmers.</p>
                 </div>
-
-                <!-- Feature 2 -->
-                <div class="card p-4 text-center glass-panel">
-                    <div class="card-content">
-                        <i class="fa-solid fa-book" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 1.5rem;"></i>
-                        <h3 class="card-title">Comprehensive Encyclopedia</h3>
-                        <p class="card-text">Access detailed cultivation guides for over 200 Indian crops, including pest management, harvesting timelines, and seasonal advice.</p>
-                    </div>
+                
+                <div class="feature-card text-center">
+                    <i class="fa-solid fa-microchip" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 1.5rem;"></i>
+                    <h3 style="margin-bottom: 1rem;">Smart Recommendations</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">Get AI-powered crop suggestions tailored exactly to your local climate conditions directly from our database.</p>
                 </div>
+                
+                <div class="feature-card text-center">
+                    <i class="fa-solid fa-flask" style="font-size: 3rem; color: #3b82f6; margin-bottom: 1.5rem;"></i>
+                    <h3 style="margin-bottom: 1rem;">Soil Analysis</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">Input your land's specific soil pH and characteristics to discover the most compatible vegetation and maximize yield.</p>
+                </div>
+                
+                <div class="feature-card text-center">
+                    <i class="fa-solid fa-cloud-sun-rain" style="font-size: 3rem; color: #8bc34a; margin-bottom: 1.5rem;"></i>
+                    <h3 style="margin-bottom: 1rem;">Weather Insights</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">Optimize your planting and harvesting based on strict temperature and average annual rainfall metrics.</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
 
-                <!-- Feature 3 -->
-                <div class="card p-4 text-center glass-panel">
-                    <div class="card-content">
-                        <i class="fa-solid fa-chart-line" style="font-size: 3rem; color: #3b82f6; margin-bottom: 1.5rem;"></i>
-                        <h3 class="card-title">Yield Tracking Dashboard</h3>
-                        <p class="card-text">Monitor your farm's performance, track historical crop yields, and view real-time agricultural statistics tailored to you.</p>
-                    </div>
+    <!-- 5. Crop Preview Section -->
+    <section class="section" style="padding: 6rem 0; background-color: var(--bg-surface);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Discover <span class="highlight">Indian Crops</span></h2>
+                <p style="font-size: 1.1rem; color: var(--text-muted);">Take a sneak peek at what you can grow perfectly in your region</p>
+            </div>
+            
+            <div class="crop-grid" id="preview-grid" style="margin-bottom: 3.5rem;">
+                <!-- Dynamically populated via Main JS logic -->
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="crops.php" class="btn btn-outline btn-large" style="padding: 1rem 3rem;">View More Crops <i class="fa-solid fa-arrow-right" style="margin-left:0.5rem;"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. How It Works Section -->
+    <section class="section" style="padding: 6rem 0; background-color: var(--bg-main);">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It <span class="highlight">Works</span></h2>
+                <p style="font-size: 1.1rem; color: var(--text-muted);">Your journey to optimized farming in three simple steps</p>
+            </div>
+            
+            <div class="step-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <i class="fa-solid fa-list-check"></i>
+                    <h3 style="margin-bottom: 1rem;">Enter your details</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height: 1.6;">Input your region's average rainfall, temperature, and soil conditions into our dashboard.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <i class="fa-solid fa-robot"></i>
+                    <h3 style="margin-bottom: 1rem;">Get recommendations</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height: 1.6;">Our AI engine analyzes the parameters and matches them against database constraints.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <i class="fa-solid fa-tractor"></i>
+                    <h3 style="margin-bottom: 1rem;">Start farming</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height: 1.6;">Use our step-by-step encyclopedia guides to begin cultivating your recommended crop safely.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="section" style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%); color: white;">
-        <div class="container text-center">
-            <h2 style="color: white; font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to Revolutionize Your Harvest?</h2>
-            <p style="font-size: 1.25rem; opacity: 0.9; max-width: 700px; margin: 0 auto 2.5rem;">Join thousands of modern farmers across India who are optimizing their agricultural practices with cutting-edge technology.</p>
-            <a href="auth.html" class="btn" style="background: white; color: var(--primary-dark); font-size: 1.25rem; padding: 1rem 2.5rem;">Create Your Free Account</a>
+    <!-- 7. Call to Action Section -->
+    <section class="section" style="padding: 6rem 0; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%); color: white; text-align:center;">
+        <div class="container">
+            <h2 style="color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem;">Ready to Revolutionize Your Harvest?</h2>
+            <p style="font-size: 1.25rem; opacity: 0.95; max-width: 700px; margin: 0 auto 3rem; line-height:1.6;">Join thousands of modern farmers across India who are optimizing their agricultural practices with cutting-edge technology.</p>
+            <a href="auth.html" class="btn" style="background: white; color: var(--primary-dark); font-size: 1.25rem; padding: 1rem 3rem; border-radius: 50px; font-weight: 700; box-shadow: 0 10px 20px rgba(0,0,0,0.15);">
+                Create Account
+            </a>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
+    <!-- 8. Footer -->
+    <footer style="background:#1e293b; color:white; padding:5rem 0 2rem;">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <a href="index.html" class="logo" style="color: white; margin-bottom: 1.5rem;">
-                        <i class="fa-solid fa-leaf"></i>
-                        <span>GrowYourCrops<span class="highlight">India</span></span>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom:4rem;">
+                <div>
+                    <a href="index.html" class="logo" style="color: white; margin-bottom: 1.5rem; display:block;">
+                        <i class="fa-solid fa-leaf" style="color:var(--accent-color);"></i>
+                        <span style="font-family:'Playfair Display', serif;">GrowYourCrops<span style="color:var(--secondary-color);">India</span></span>
                     </a>
-                    <p style="margin-top: 1rem;">Empowering the backbone of India with intelligent, data-driven farming solutions tailored for the 21st century.</p>
+                    <p style="color:#94a3b8; font-size:0.95rem; line-height:1.6;">Empowering the backbone of India with intelligent, data-driven farming solutions tailored for the 21st century.</p>
                 </div>
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="crops.php">Crop Encyclopedia</a></li>
-                        <li><a href="recommendation.php">AI Recommendations</a></li>
-                        <li><a href="dashboard.php">Farmer Dashboard</a></li>
+                <div>
+                    <h4 style="color:white; margin-bottom:1.5rem; font-size: 1.2rem;">Quick Links</h4>
+                    <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:0.8rem;">
+                        <li><a href="index.html" style="color:#94a3b8; transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">Home</a></li>
+                        <li><a href="crops.php" style="color:#94a3b8; transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">Crop Encyclopedia</a></li>
+                        <li><a href="recommendation.php" style="color:#94a3b8; transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">AI Recommendations</a></li>
+                        <li><a href="dashboard.php" style="color:#94a3b8; transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">Dashboard</a></li>
                     </ul>
                 </div>
-                <div class="footer-col">
-                    <h4>Support</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                <div>
+                    <h4 style="color:white; margin-bottom:1.5rem; font-size: 1.2rem;">Support</h4>
+                    <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:0.8rem;">
+                        <li><a href="#" style="color:#94a3b8; transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">About Us</a></li>
+                        <li><a href="#" style="color:#94a3b8; transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">Contact Us</a></li>
+                        <li><a href="#" style="color:#94a3b8; transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">Privacy Policy</a></li>
                     </ul>
                 </div>
-                <div class="footer-col">
-                    <h4>Connect</h4>
-                    <div style="display: flex; gap: 1rem; font-size: 1.5rem; margin-top: 1rem;">
-                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <div>
+                    <h4 style="color:white; margin-bottom:1.5rem; font-size: 1.2rem;">Connect</h4>
+                    <p style="color:#94a3b8; font-size:0.95rem; margin-bottom:1.5rem;">Follow us on social media for daily farming tips and updates.</p>
+                    <div style="display: flex; gap: 1.25rem; font-size: 1.5rem;">
+                        <a href="#" style="color:#94a3b8; transition:all 0.3s; transform-origin:center;" onmouseover="this.style.color='#1da1f2'; this.style.transform='scale(1.1)';" onmouseout="this.style.color='#94a3b8'; this.style.transform='scale(1)';"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" style="color:#94a3b8; transition:all 0.3s; transform-origin:center;" onmouseover="this.style.color='#4267B2'; this.style.transform='scale(1.1)';" onmouseout="this.style.color='#94a3b8'; this.style.transform='scale(1)';"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" style="color:#94a3b8; transition:all 0.3s; transform-origin:center;" onmouseover="this.style.color='#E1306C'; this.style.transform='scale(1.1)';" onmouseout="this.style.color='#94a3b8'; this.style.transform='scale(1)';"><i class="fa-brands fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div style="text-align:center; padding-top:2rem; border-top:1px solid #334155; color:#64748b; font-size:0.9rem;">
                 <p>&copy; 2026 Grow Your Crops India. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Main JS -->
+    <!-- 9. Login State Logic / JS -->
+    <script>
+        // Check Login State Logic
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Determine if user is logged in
+                const res = await fetch('api/auth.php?action=session');
+                const data = await res.json();
+                
+                const authContainer = document.getElementById('auth-links');
+                
+                if (res.ok && data.user) {
+                    // Logged In State: Show 'Sign Out' and hide 'Login/Register'
+                    authContainer.innerHTML = `<a href="javascript:void(0)" onclick="handleLogout()" class="btn btn-outline" style="color: var(--error-color); border-color: var(--error-color);">Sign Out</a>`;
+                } else {
+                    // Not Logged In State
+                    authContainer.innerHTML = `<a href="auth.html" class="btn btn-outline" id="login-btn">Login/Register</a>`;
+                }
+            } catch (err) {
+                console.error("Auth status fetch ignored natively.");
+            }
+
+            // Dynamically load 3 crop previews natively from crops.json
+            try {
+                const cropRes = await fetch('assets/data/crops.json');
+                const allCrops = await cropRes.json();
+                const previewGrid = document.getElementById('preview-grid');
+                previewGrid.innerHTML = ''; // clear any static loading skeletons
+                
+                const previewCrops = allCrops.slice(0, 3);
+                
+                previewCrops.forEach(crop => {
+                    const nameEscaped = crop.name.replace(/'/g, "\\'");
+                    const card = document.createElement('div');
+                    card.className = 'crop-card';
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => window.location.href = `crop_details.php?id=${crop.id}`;
+                    
+                    card.innerHTML = `
+                        <div style="position:relative; height:200px; background:#e2e8f0; overflow:hidden;">
+                            <img src="${crop.image_url}" onerror="this.onerror=null; this.src='assets/images/default_crop.jpg';" loading="lazy" class="crop-image" alt="${nameEscaped}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                            <span class="badge" style="position: absolute; top:1rem; right:1rem;">${crop.season}</span>
+                        </div>
+                        <div class="crop-details" style="padding: 1.5rem; text-align: left;">
+                            <h3 class="crop-title" style="margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--primary-dark);">${crop.name}</h3>
+                            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;"><i class="fa-solid fa-layer-group" style="width: 20px; color: var(--secondary-color);"></i> ${crop.soil_type}</p>
+                        </div>
+                    `;
+                    previewGrid.appendChild(card);
+                });
+            } catch(e) {
+                console.error('Failed to natively load crop previews', e);
+            }
+        });
+
+        // Logout Processing
+        async function handleLogout() {
+            try {
+                const res = await fetch('api/auth.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'logout' })
+                });
+                
+                if(res.ok) {
+                    // Force redirect back home as an unauthenticated user natively
+                    window.location.href = 'index.html'; 
+                }
+            } catch (err) {
+                console.error("Logout failed.");
+            }
+        }
+    </script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>
