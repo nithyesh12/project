@@ -16,7 +16,7 @@ class PythonApiClient
      * @param string $state
      * @return array|null
      */
-    public function getRecommendations($soil_ph, $rainfall, $temperature, $humidity, $nitrogen, $state)
+    public function getRecommendations($soil_ph, $rainfall, $temperature, $humidity, $nitrogen, $state, $season = null)
     {
         $endpoint = $this->base_url . "/api/recommend";
 
@@ -26,7 +26,8 @@ class PythonApiClient
             "temperature" => $temperature,
             "humidity" => $humidity,
             "nitrogen" => $nitrogen,
-            "state" => $state
+            "state" => $state,
+            "season" => $season
         ]);
 
         $ch = curl_init($endpoint);

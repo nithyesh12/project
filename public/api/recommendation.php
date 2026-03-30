@@ -48,7 +48,8 @@ if (!empty($data->state) && isset($data->soil_ph) && isset($data->temperature) &
         $data->temperature, 
         $data->humidity ?? 60, 
         $data->nitrogen ?? 50, 
-        $data->state
+        $data->state,
+        $data->season ?? null
     );
 
     if ($recommendations) {

@@ -59,19 +59,30 @@ if (!isset($_SESSION['user_id'])) {
                 </h3>
 
                 <form id="recommendation-form">
-                    <div class="form-group">
-                        <label for="state"><i class="fa-solid fa-map-location-dot"></i> Select State / Region</label>
-                        <select id="state" name="state" required>
-                            <option value="" disabled selected>Choose your state...</option>
-                            <option value="Punjab">Punjab</option>
-                            <option value="Uttar Pradesh">Uttar Pradesh</option>
-                            <option value="Maharashtra">Maharashtra</option>
-                            <option value="Karnataka">Karnataka</option>
-                            <option value="Gujarat">Gujarat</option>
-                            <option value="West Bengal">West Bengal</option>
-                            <option value="Madhya Pradesh">Madhya Pradesh</option>
-                            <option value="Assam">Assam</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="state"><i class="fa-solid fa-map-location-dot"></i> Select State / Region</label>
+                            <select id="state" name="state" required>
+                                <option value="" disabled selected>Choose your state...</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Assam">Assam</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="season"><i class="fa-solid fa-cloud-sun"></i> Target Season</label>
+                            <select id="season" name="season" required>
+                                <option value="" disabled selected>Choose season...</option>
+                                <option value="Kharif">Kharif (Monsoon: Jul - Oct)</option>
+                                <option value="Rabi">Rabi (Winter: Oct - Mar)</option>
+                                <option value="Zaid">Zaid (Summer: Mar - Jun)</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-row">
@@ -158,6 +169,7 @@ if (!isset($_SESSION['user_id'])) {
 
             const payload = {
                 state: document.getElementById('state').value,
+                season: document.getElementById('season').value,
                 soil_ph: parseFloat(document.getElementById('soil_ph').value),
                 temperature: parseFloat(document.getElementById('temperature').value),
                 rainfall: parseFloat(document.getElementById('rainfall').value),
@@ -179,15 +191,19 @@ if (!isset($_SESSION['user_id'])) {
 
                 if(response.ok) {
                     // Populate results
+                    // Populate results grouped sequentially by designated season
                     resultsContainer.innerHTML = '';
+                    let targetedSeason = document.getElementById('season').value;
+                    resultsContainer.innerHTML += `<div style="background:#f1f5f9; padding:0.75rem 1rem; border-radius:4px; font-weight:600; color:var(--primary-dark); margin-bottom:1rem; border-left:4px solid var(--primary-color);"><i class="fa-solid fa-calendar-days"></i> Accurately Recommended for <span style="font-weight:700; color:var(--primary-color);">${targetedSeason}</span> Season</div>`;
+
                     res.data.forEach((item, index) => {
                         let colorClass = index === 0 ? 'var(--primary-color)' : (index === 1 ? 'var(--secondary-color)' : '#64748b');
                         
                         resultsContainer.innerHTML += `
                         <div style="border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1rem; background: var(--bg-surface); position: relative; overflow: hidden; margin-bottom: 1rem;">
                             ${index === 0 ? '<div style="position: absolute; right: -20px; top: 10px; background: var(--primary-color); color: white; padding: 0.25rem 2rem; transform: rotate(45deg); font-size: 0.75rem; font-weight: bold;">Top Pick</div>' : ''}
-                            <h4 style="color: ${colorClass}; margin-bottom: 0.5rem;"><i class="fa-solid fa-seedling"></i> ${item.crop}</h4>
-                            <p style="font-size: 0.9rem; color: var(--text-muted);">${item.match_score}% Match based on your precise land parameters.</p>
+                            <h4 style="color: ${colorClass}; margin-bottom: 0.25rem; font-size: 1.25rem;"><i class="fa-solid fa-seedling"></i> ${item.crop}</h4>
+                            <p style="font-size: 0.95rem; color: var(--text-muted); display:flex; gap:1rem;"><span style="background:#e0f2fe; padding:0.1rem 0.5rem; border-radius:4px; color:#0369a1;"><i class="fa-solid fa-cloud-sun"></i> Optimal Season: ${item.season}</span> <span style="color:#10b981; font-weight:600;">Suitability Match: ${item.match_score}%</span></p>
                             <div style="margin-top: 1rem; background: #e2e8f0; height: 8px; border-radius: 4px; overflow: hidden;">
                                 <div style="width: ${item.match_score}%; background: ${colorClass}; height: 100%;"></div>
                             </div>

@@ -106,6 +106,7 @@ def recommend_crop():
             
         results.append({
             "crop": crop,
+            "season": season_input.capitalize() if season_input else "/".join(conditions["season"]),
             "match_score": round(final_score, 1)
         })
         
