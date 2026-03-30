@@ -7,26 +7,26 @@ CORS(app)
 # Knowledge Base: Ideal conditions for crops in India
 # Dictionary mapping crop name to optimal (min_pH, max_pH, min_temp, max_temp, min_rain, max_rain, min_N, max_N)
 CROP_KNOWLEDGE = {
-    "Rice": {"ph": (5.5, 7.0), "temp": (20, 35), "rain": (150, 300), "n": (80, 120), "season": ["Kharif"]},
-    "Wheat": {"ph": (6.0, 7.5), "temp": (15, 25), "rain": (50, 100), "n": (60, 90), "season": ["Rabi"]},
-    "Cotton": {"ph": (6.0, 8.0), "temp": (21, 30), "rain": (50, 100), "n": (70, 110), "season": ["Kharif"]},
-    "Sugarcane": {"ph": (6.5, 7.5), "temp": (21, 27), "rain": (150, 250), "n": (100, 150), "season": ["Kharif", "Zaid"]},
-    "Maize": {"ph": (5.5, 7.5), "temp": (21, 27), "rain": (50, 100), "n": (60, 100), "season": ["Kharif", "Rabi"]},
-    "Mustard": {"ph": (6.0, 7.5), "temp": (15, 25), "rain": (30, 80), "n": (40, 70), "season": ["Rabi"]},
-    "Soybean": {"ph": (6.0, 7.5), "temp": (20, 30), "rain": (60, 100), "n": (20, 40), "season": ["Kharif"]}, 
-    "Groundnut": {"ph": (6.0, 6.5), "temp": (25, 30), "rain": (50, 125), "n": (15, 30), "season": ["Kharif", "Zaid"]},
-    "Jute": {"ph": (6.0, 7.5), "temp": (24, 35), "rain": (150, 250), "n": (80, 120), "season": ["Kharif"]},
-    "Apple": {"ph": (5.8, 7.0), "temp": (15, 24), "rain": (100, 125), "n": (50, 80), "season": ["Rabi"]},
-    "Banana": {"ph": (6.5, 7.5), "temp": (26, 30), "rain": (150, 250), "n": (100, 140), "season": ["Kharif", "Zaid"]},
-    "Grapes": {"ph": (6.5, 7.5), "temp": (15, 40), "rain": (50, 90), "n": (80, 100), "season": ["Zaid"]},
-    "Watermelon": {"ph": (6.0, 7.0), "temp": (25, 35), "rain": (40, 60), "n": (50, 70), "season": ["Zaid"]},
-    "Mango": {"ph": (5.5, 7.5), "temp": (24, 27), "rain": (100, 250), "n": (80, 120), "season": ["Zaid"]},
-    "Potato": {"ph": (5.0, 6.5), "temp": (15, 20), "rain": (50, 100), "n": (80, 120), "season": ["Rabi"]},
-    "Tomato": {"ph": (6.0, 7.0), "temp": (20, 30), "rain": (40, 60), "n": (60, 90), "season": ["Rabi", "Kharif"]},
-    "Onion": {"ph": (6.0, 7.0), "temp": (15, 30), "rain": (60, 80), "n": (40, 60), "season": ["Rabi", "Kharif", "Zaid"]},
-    "Coffee": {"ph": (5.5, 6.5), "temp": (15, 28), "rain": (150, 250), "n": (80, 100), "season": ["Kharif"]},
-    "Tea": {"ph": (4.5, 5.5), "temp": (20, 30), "rain": (150, 300), "n": (80, 120), "season": ["Kharif"]},
-    "Tobacco": {"ph": (5.5, 6.5), "temp": (20, 30), "rain": (50, 100), "n": (80, 100), "season": ["Rabi", "Kharif"]}
+    "Rice": {"ph": (5.5, 7.0), "temp": (20, 35), "rain": (150, 300), "n": (80, 120), "season": ["Kharif"], "states": ["All"]},
+    "Wheat": {"ph": (6.0, 7.5), "temp": (15, 25), "rain": (50, 100), "n": (60, 90), "season": ["Rabi"], "states": ["Punjab", "Haryana", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Bihar", "Gujarat"]},
+    "Cotton": {"ph": (6.0, 8.0), "temp": (21, 30), "rain": (50, 100), "n": (70, 110), "season": ["Kharif"], "states": ["Maharashtra", "Gujarat", "Telangana", "Andhra Pradesh", "Haryana", "Punjab", "Rajasthan", "Karnataka", "Madhya Pradesh"]},
+    "Sugarcane": {"ph": (6.5, 7.5), "temp": (21, 27), "rain": (150, 250), "n": (100, 150), "season": ["Kharif", "Zaid"], "states": ["Uttar Pradesh", "Maharashtra", "Karnataka", "Tamil Nadu", "Andhra Pradesh", "Gujarat", "Bihar", "Haryana", "Punjab"]},
+    "Maize": {"ph": (5.5, 7.5), "temp": (21, 27), "rain": (50, 100), "n": (60, 100), "season": ["Kharif", "Rabi"], "states": ["All"]},
+    "Mustard": {"ph": (6.0, 7.5), "temp": (15, 25), "rain": (30, 80), "n": (40, 70), "season": ["Rabi"], "states": ["Rajasthan", "Haryana", "Madhya Pradesh", "Uttar Pradesh", "West Bengal"]},
+    "Soybean": {"ph": (6.0, 7.5), "temp": (20, 30), "rain": (60, 100), "n": (20, 40), "season": ["Kharif"], "states": ["Madhya Pradesh", "Maharashtra", "Rajasthan", "Telangana"]}, 
+    "Groundnut": {"ph": (6.0, 6.5), "temp": (25, 30), "rain": (50, 125), "n": (15, 30), "season": ["Kharif", "Zaid"], "states": ["Gujarat", "Andhra Pradesh", "Tamil Nadu", "Karnataka", "Maharashtra", "Rajasthan"]},
+    "Jute": {"ph": (6.0, 7.5), "temp": (24, 35), "rain": (150, 250), "n": (80, 120), "season": ["Kharif"], "states": ["West Bengal", "Bihar", "Assam", "Odisha", "Meghalaya"]},
+    "Apple": {"ph": (5.8, 7.0), "temp": (15, 24), "rain": (100, 125), "n": (50, 80), "season": ["Rabi"], "states": ["Jammu and Kashmir", "Himachal Pradesh", "Uttarakhand", "Arunachal Pradesh"]},
+    "Banana": {"ph": (6.5, 7.5), "temp": (26, 30), "rain": (150, 250), "n": (100, 140), "season": ["Kharif", "Zaid"], "states": ["Tamil Nadu", "Maharashtra", "Gujarat", "Andhra Pradesh", "Karnataka", "Bihar", "Uttar Pradesh", "West Bengal", "Kerala"]},
+    "Grapes": {"ph": (6.5, 7.5), "temp": (15, 40), "rain": (50, 90), "n": (80, 100), "season": ["Zaid"], "states": ["Maharashtra", "Karnataka", "Tamil Nadu", "Andhra Pradesh"]},
+    "Watermelon": {"ph": (6.0, 7.0), "temp": (25, 35), "rain": (40, 60), "n": (50, 70), "season": ["Zaid"], "states": ["All"]},
+    "Mango": {"ph": (5.5, 7.5), "temp": (24, 27), "rain": (100, 250), "n": (80, 120), "season": ["Zaid"], "states": ["All"]},
+    "Potato": {"ph": (5.0, 6.5), "temp": (15, 20), "rain": (50, 100), "n": (80, 120), "season": ["Rabi"], "states": ["Uttar Pradesh", "West Bengal", "Bihar", "Gujarat", "Madhya Pradesh", "Punjab"]},
+    "Tomato": {"ph": (6.0, 7.0), "temp": (20, 30), "rain": (40, 60), "n": (60, 90), "season": ["Rabi", "Kharif"], "states": ["All"]},
+    "Onion": {"ph": (6.0, 7.0), "temp": (15, 30), "rain": (60, 80), "n": (40, 60), "season": ["Rabi", "Kharif", "Zaid"], "states": ["Maharashtra", "Madhya Pradesh", "Karnataka", "Gujarat", "Bihar"]},
+    "Coffee": {"ph": (5.5, 6.5), "temp": (15, 28), "rain": (150, 250), "n": (80, 100), "season": ["Kharif"], "states": ["Karnataka", "Kerala", "Tamil Nadu"]},
+    "Tea": {"ph": (4.5, 5.5), "temp": (20, 30), "rain": (150, 300), "n": (80, 120), "season": ["Kharif"], "states": ["Assam", "West Bengal", "Tamil Nadu", "Kerala", "Tripura", "Himachal Pradesh"]},
+    "Tobacco": {"ph": (5.5, 6.5), "temp": (20, 30), "rain": (50, 100), "n": (80, 100), "season": ["Rabi", "Kharif"], "states": ["Andhra Pradesh", "Gujarat", "Karnataka", "Uttar Pradesh", "Bihar", "Tamil Nadu"]}
 }
 
 def calculate_suitability(metric_val, ideal_min, ideal_max):
@@ -87,6 +87,13 @@ def recommend_crop():
         if season_input and isinstance(season_input, str):
             if season_input.capitalize() not in conditions['season']:
                 # Zero score if completely wrong season
+                continue
+                
+        # Evaluate strict state compatibility mapping
+        if state and isinstance(state, str):
+            allowed_states = conditions.get('states', ['All'])
+            if "All" not in allowed_states and state not in allowed_states:
+                # Highly incompatible regional geographic crop
                 continue
                 
         scores = []
