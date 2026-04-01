@@ -132,7 +132,7 @@ async function fetchWeather(coordsStr) {
     const [lat, lon] = coordsStr.split(',');
     
     // Core Engine Call - NO API KEY REQUIRED - 100% Free
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&hourly=temperature_2m,precipitation_probability,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto`;
     
     try {
         const response = await fetch(url);
@@ -193,7 +193,49 @@ async function fetchWeather(coordsStr) {
             </div>`;
         }
 
-        // --- 3. 6-Day Predictive Forecast Implementation ---
+        // --- 3. 24-Hour Forecast Implementation ---
+        const hourlyRow = document.getElementById('hourly-row');
+        hourlyRow.innerHTML = '';
+        
+        // Find current hour index dynamically based on local time matching the API's timezone
+        const nowTime = new Date().getTime();
+        let currentIndex = 0;
+        let minDiff = Infinity;
+        for(let i = 0; i < data.hourly.time.length; i++) {
+            const hTime = new Date(data.hourly.time[i]).getTime();
+            if(Math.abs(hTime - nowTime) < minDiff) {
+                minDiff = Math.abs(hTime - nowTime);
+                currentIndex = i;
+            }
+        }
+
+        // Render exactly next 24 hours into the horizontally scrolling container
+        for(let i = currentIndex; i < currentIndex + 24 && i < data.hourly.time.length; i++) {
+            const hTimeObj = new Date(data.hourly.time[i]);
+            let hours = hTimeObj.getHours();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12; // Formatter: 12hr clock
+            
+            let timeLabel = i === currentIndex ? "Now" : `${hours} ${ampm}`;
+            const hTemp = Math.round(data.hourly.temperature_2m[i]);
+            const hRain = data.hourly.precipitation_probability[i];
+            const hCode = data.hourly.weather_code[i];
+            const hInfo = getWeatherInfo(hCode);
+            
+            const isCurrent = (i === currentIndex);
+            
+            const cardHtml = `
+                <div style="min-width:105px; padding:1.2rem 1rem; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:space-between; text-align:center; background:${isCurrent ? 'var(--primary-color)' : '#f8fafc'}; color:${isCurrent ? 'white' : 'var(--text-main)'}; border:1px solid ${isCurrent ? 'var(--primary-dark)' : '#e2e8f0'}; box-shadow:${isCurrent ? '0 4px 10px rgba(5,150,105,0.2)' : 'none'}; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <span style="font-size:0.9rem; font-weight:600; color:${isCurrent ? 'rgba(255,255,255,0.9)' : 'var(--primary-dark)'}; margin-bottom:0.5rem;">${timeLabel}</span>
+                    <i class="fa-solid ${hInfo.icon}" style="font-size:2rem; color:${isCurrent ? '#fff' : hInfo.color}; margin-bottom:0.5rem; filter:${isCurrent ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' : 'none'}"></i>
+                    <span style="font-size:1.3rem; font-weight:700; margin-bottom:0.25rem;">${hTemp}°C</span>
+                    <span style="font-size:0.85rem; font-weight:500; color:${isCurrent ? 'rgba(255,255,255,0.8)' : '#3b82f6'};"><i class="fa-solid fa-droplet"></i> ${hRain}%</span>
+                </div>
+            `;
+            hourlyRow.innerHTML += cardHtml;
+        }
+
+        // --- 4. 6-Day Predictive Forecast Implementation ---
         const daily = data.daily;
         const forecastRow = document.getElementById('forecast-row');
         forecastRow.innerHTML = '';

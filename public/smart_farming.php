@@ -439,9 +439,9 @@ if (!isset($_SESSION['user_id'])) {
 
             <!-- MODULE 1: IRRIGATION MANAGEMENT -->
             <div class="module-card">
-                <div class="module-topbar" style="background: linear-gradient(135deg, #0369a1, #0ea5e9);">
-                    <i class="fa-solid fa-droplet"></i>
-                    <h2>Irrigation Management</h2>
+                <div class="module-topbar" style="background: linear-gradient(135deg, #0369a1, #0ea5e9); color: #082f49;">
+                    <i class="fa-solid fa-droplet" style="color: #bae6fd;"></i>
+                    <h2 style="color: #fef08a;">Irrigation Management</h2>
                 </div>
                 <div class="module-body">
                     <div class="form-area">
@@ -530,9 +530,9 @@ if (!isset($_SESSION['user_id'])) {
 
             <!-- MODULE 2: FERTILIZER RECOMMENDATION -->
             <div class="module-card">
-                <div class="module-topbar" style="background: linear-gradient(135deg, #b45309, #f59e0b);">
-                    <i class="fa-solid fa-flask-vial"></i>
-                    <h2>Fertilizer Recommendation</h2>
+                <div class="module-topbar" style="background: linear-gradient(135deg, #b45309, #f59e0b); color: #451a03;">
+                    <i class="fa-solid fa-flask-vial" style="color: #fde047;"></i>
+                    <h2 style="color: #fef08a;">Fertilizer Recommendation</h2>
                 </div>
                 <div class="module-body">
                     <div class="form-area">
@@ -614,9 +614,9 @@ if (!isset($_SESSION['user_id'])) {
 
             <!-- MODULE 3: PEST & DISEASE MANAGEMENT -->
             <div class="module-card">
-                <div class="module-topbar" style="background: linear-gradient(135deg, #9f1239, #e11d48);">
-                    <i class="fa-solid fa-bug"></i>
-                    <h2>Pest & Disease Diagnosis</h2>
+                <div class="module-topbar" style="background: linear-gradient(135deg, #9f1239, #e11d48); color: #4c0519;">
+                    <i class="fa-solid fa-bug" style="color: #fda4af;"></i>
+                    <h2 style="color: #fef08a;">Pest & Disease Diagnosis</h2>
                 </div>
                 <div class="module-body">
                     <div class="form-area">
