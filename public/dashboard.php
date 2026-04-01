@@ -197,6 +197,7 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="crops.php"><i class="fa-solid fa-book-open"></i> Crop Encyclopedia</a></li>
             <li><a href="recommendation.php"><i class="fa-solid fa-wand-magic-sparkles"></i> Recommendations</a></li>
             <li><a href="myfarm.php"><i class="fa-solid fa-tractor"></i> My Farm</a></li>
+            <li><a href="smart_farming.php"><i class="fa-solid fa-microchip"></i> Smart Modules</a></li>
             <!-- Dedicated Weather Link explicit payload integration -->
             <li><a href="weather.php" style="color: #60a5fa;"><i class="fa-solid fa-cloud-sun"></i> Weather Insights</a></li>
         </ul>
