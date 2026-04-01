@@ -112,7 +112,7 @@ session_start();
             <div class="forecast-container mb-4" style="background:white; border-left: 4px solid var(--primary-light);">
                 <h3 class="mb-4" style="color:var(--primary-dark); font-family:'Playfair Display'; font-size:1.5rem;"><i class="fa-solid fa-clock" style="color:#0ea5e9;"></i> 24-Hour Forecast</h3>
                 <div class="hourly-scroll-wrapper" style="overflow-x: auto; padding-bottom: 15px; scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent;">
-                    <div id="hourly-row" style="display: grid; grid-template-rows: auto auto; grid-auto-flow: column; gap: 1rem; width: max-content;">
+                    <div id="hourly-row" style="display: grid; grid-template-rows: auto auto auto; grid-auto-flow: column; gap: 1rem; width: max-content;">
                         <!-- JS injected -->
                         <div style="padding: 2rem; text-align: center; color: var(--text-muted); width: 100%;"><i class="fa-solid fa-spinner fa-spin"></i> Fetching hourly data...</div>
                     </div>
@@ -121,7 +121,7 @@ session_start();
 
             <!-- Deep 6-Day Forecast -->
             <div class="forecast-container" style="background:white;">
-                <h3 class="mb-4" style="color:var(--primary-dark); font-family:'Playfair Display'; font-size:1.75rem;">Deep 6-Day Forecast & Precipitation</h3>
+                <h3 class="mb-4" style="color:var(--primary-dark); font-family:'Playfair Display'; font-size:1.75rem; text-align: center;">Deep 6-Day Forecast & Precipitation</h3>
                 <div class="forecast-row" id="forecast-row">
                     <!-- Populated natively by JS -->
                     <div style="padding:2rem; width:100%; text-align:center; color:var(--text-muted);"><i class="fa-solid fa-circle-notch fa-spin"></i> Fetching meteorological arrays...</div>
