@@ -439,7 +439,7 @@ if (!isset($_SESSION['user_id'])) {
 
             <!-- MODULE 1: IRRIGATION MANAGEMENT -->
             <div class="module-card">
-                <div class="module-topbar">
+                <div class="module-topbar" style="background: linear-gradient(135deg, #0369a1, #0ea5e9);">
                     <i class="fa-solid fa-droplet"></i>
                     <h2>Irrigation Management</h2>
                 </div>
@@ -486,38 +486,38 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
 
                             <div style="margin-top: 1.5rem;">
-                                <button type="submit" class="btn-smart"><i class="fa-solid fa-calculator"></i> Calculate Water Output</button>
+                                <button type="submit" class="btn-smart" style="background: #0284c7;"><i class="fa-solid fa-calculator"></i> Calculate Water Output</button>
                                 <button type="button" class="btn-reset" onclick="resetForm('irrigation-form', 'irig-result-placeholder', 'irig-result-data')">Reset</button>
                             </div>
                         </form>
                     </div>
 
-                    <div class="result-container">
+                    <div class="result-container" style="background: #f0f9ff; border-color: #7dd3fc;">
                         <div id="irig-result-placeholder" class="result-placeholder">
-                            <i class="fa-solid fa-faucet-drip"></i>
+                            <i class="fa-solid fa-faucet-drip" style="color: #7dd3fc;"></i>
                             <p>Fill the form to calculate your detailed water requirement and irrigation schedule.</p>
                         </div>
                         <div id="irig-result-data" class="result-data">
-                            <h3><i class="fa-solid fa-check-circle" style="color:var(--primary-light);"></i> Irrigation Plan</h3>
+                            <h3 style="color: #0369a1;"><i class="fa-solid fa-circle-check" style="color: #0ea5e9;"></i> Irrigation Plan</h3>
                             
-                            <div class="data-card">
-                                <div class="data-card-icon"><i class="fa-solid fa-glass-water"></i></div>
+                            <div class="data-card" style="border-color: #0ea5e9;">
+                                <div class="data-card-icon" style="background: #e0f2fe; color: #0284c7;"><i class="fa-solid fa-glass-water"></i></div>
                                 <div class="data-card-content">
                                     <h4>Total Daily Requirement</h4>
-                                    <p><span class="highlight-value" id="out-irig-liters">0</span> Liters/Day</p>
+                                    <p><span class="highlight-value" id="out-irig-liters" style="color: #0284c7;">0</span> Liters/Day</p>
                                 </div>
                             </div>
 
-                            <div class="data-card">
-                                <div class="data-card-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                            <div class="data-card" style="border-color: #0ea5e9;">
+                                <div class="data-card-icon" style="background: #e0f2fe; color: #0284c7;"><i class="fa-solid fa-clock-rotate-left"></i></div>
                                 <div class="data-card-content">
                                     <h4>Recommended Frequency</h4>
                                     <p id="out-irig-freq">Every X days</p>
                                 </div>
                             </div>
 
-                            <div class="data-card">
-                                <div class="data-card-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                            <div class="data-card" style="border-color: #0ea5e9;">
+                                <div class="data-card-icon" style="background: #e0f2fe; color: #0284c7;"><i class="fa-solid fa-lightbulb"></i></div>
                                 <div class="data-card-content">
                                     <h4>System Suggestion</h4>
                                     <p id="out-irig-method" style="font-size:1rem; font-weight:500; color:#334155;">Drip Irrigation recommended.</p>
