@@ -1,33 +1,36 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import mysql.connector
 
 app = Flask(__name__)
 CORS(app)
 
-# Knowledge Base: Ideal conditions for crops in India
-# Dictionary mapping crop name to optimal (min_pH, max_pH, min_temp, max_temp, min_rain, max_rain, min_N, max_N)
-CROP_KNOWLEDGE = {
-    "Rice": {"ph": (5.5, 7.0), "temp": (20, 35), "rain": (150, 300), "n": (80, 120), "season": ["Kharif"], "states": ["All"]},
-    "Wheat": {"ph": (6.0, 7.5), "temp": (15, 25), "rain": (50, 100), "n": (60, 90), "season": ["Rabi"], "states": ["Punjab", "Haryana", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Bihar", "Gujarat"]},
-    "Cotton": {"ph": (6.0, 8.0), "temp": (21, 30), "rain": (50, 100), "n": (70, 110), "season": ["Kharif"], "states": ["Maharashtra", "Gujarat", "Telangana", "Andhra Pradesh", "Haryana", "Punjab", "Rajasthan", "Karnataka", "Madhya Pradesh"]},
-    "Sugarcane": {"ph": (6.5, 7.5), "temp": (21, 27), "rain": (150, 250), "n": (100, 150), "season": ["Kharif", "Zaid"], "states": ["Uttar Pradesh", "Maharashtra", "Karnataka", "Tamil Nadu", "Andhra Pradesh", "Gujarat", "Bihar", "Haryana", "Punjab"]},
-    "Maize": {"ph": (5.5, 7.5), "temp": (21, 27), "rain": (50, 100), "n": (60, 100), "season": ["Kharif", "Rabi"], "states": ["All"]},
-    "Mustard": {"ph": (6.0, 7.5), "temp": (15, 25), "rain": (30, 80), "n": (40, 70), "season": ["Rabi"], "states": ["Rajasthan", "Haryana", "Madhya Pradesh", "Uttar Pradesh", "West Bengal"]},
-    "Soybean": {"ph": (6.0, 7.5), "temp": (20, 30), "rain": (60, 100), "n": (20, 40), "season": ["Kharif"], "states": ["Madhya Pradesh", "Maharashtra", "Rajasthan", "Telangana"]}, 
-    "Groundnut": {"ph": (6.0, 6.5), "temp": (25, 30), "rain": (50, 125), "n": (15, 30), "season": ["Kharif", "Zaid"], "states": ["Gujarat", "Andhra Pradesh", "Tamil Nadu", "Karnataka", "Maharashtra", "Rajasthan"]},
-    "Jute": {"ph": (6.0, 7.5), "temp": (24, 35), "rain": (150, 250), "n": (80, 120), "season": ["Kharif"], "states": ["West Bengal", "Bihar", "Assam", "Odisha", "Meghalaya"]},
-    "Apple": {"ph": (5.8, 7.0), "temp": (15, 24), "rain": (100, 125), "n": (50, 80), "season": ["Rabi"], "states": ["Jammu and Kashmir", "Himachal Pradesh", "Uttarakhand", "Arunachal Pradesh"]},
-    "Banana": {"ph": (6.5, 7.5), "temp": (26, 30), "rain": (150, 250), "n": (100, 140), "season": ["Kharif", "Zaid"], "states": ["Tamil Nadu", "Maharashtra", "Gujarat", "Andhra Pradesh", "Karnataka", "Bihar", "Uttar Pradesh", "West Bengal", "Kerala"]},
-    "Grapes": {"ph": (6.5, 7.5), "temp": (15, 40), "rain": (50, 90), "n": (80, 100), "season": ["Zaid"], "states": ["Maharashtra", "Karnataka", "Tamil Nadu", "Andhra Pradesh"]},
-    "Watermelon": {"ph": (6.0, 7.0), "temp": (25, 35), "rain": (40, 60), "n": (50, 70), "season": ["Zaid"], "states": ["All"]},
-    "Mango": {"ph": (5.5, 7.5), "temp": (24, 27), "rain": (100, 250), "n": (80, 120), "season": ["Zaid"], "states": ["All"]},
-    "Potato": {"ph": (5.0, 6.5), "temp": (15, 20), "rain": (50, 100), "n": (80, 120), "season": ["Rabi"], "states": ["Uttar Pradesh", "West Bengal", "Bihar", "Gujarat", "Madhya Pradesh", "Punjab"]},
-    "Tomato": {"ph": (6.0, 7.0), "temp": (20, 30), "rain": (40, 60), "n": (60, 90), "season": ["Rabi", "Kharif"], "states": ["All"]},
-    "Onion": {"ph": (6.0, 7.0), "temp": (15, 30), "rain": (60, 80), "n": (40, 60), "season": ["Rabi", "Kharif", "Zaid"], "states": ["Maharashtra", "Madhya Pradesh", "Karnataka", "Gujarat", "Bihar"]},
-    "Coffee": {"ph": (5.5, 6.5), "temp": (15, 28), "rain": (150, 250), "n": (80, 100), "season": ["Kharif"], "states": ["Karnataka", "Kerala", "Tamil Nadu"]},
-    "Tea": {"ph": (4.5, 5.5), "temp": (20, 30), "rain": (150, 300), "n": (80, 120), "season": ["Kharif"], "states": ["Assam", "West Bengal", "Tamil Nadu", "Kerala", "Tripura", "Himachal Pradesh"]},
-    "Tobacco": {"ph": (5.5, 6.5), "temp": (20, 30), "rain": (50, 100), "n": (80, 100), "season": ["Rabi", "Kharif"], "states": ["Andhra Pradesh", "Gujarat", "Karnataka", "Uttar Pradesh", "Bihar", "Tamil Nadu"]}
-}
+def fetch_crop_knowledge():
+    knowledge = {}
+    try:
+        conn = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="",
+            database="growyourcrops"
+        )
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM crops")
+        crops = cursor.fetchall()
+        for c in crops:
+            knowledge[c['crop_name']] = {
+                "ph": (c['ph_min'] if c['ph_min'] is not None else 0.0, c['ph_max'] if c['ph_max'] is not None else 14.0),
+                "temp": (c['temp_min'] if c['temp_min'] is not None else 0.0, c['temp_max'] if c['temp_max'] is not None else 50.0),
+                "rain": (c['rain_min'] if c['rain_min'] is not None else 0.0, c['rain_max'] if c['rain_max'] is not None else 5000.0),
+                "n": (c['n_min'] if c['n_min'] is not None else 0.0, c['n_max'] if c['n_max'] is not None else 500.0),
+                "season": [s.strip() for s in c['seasons'].split(",")] if c['seasons'] else ["All"],
+                "states": [s.strip() for s in c['states'].split(",")] if c['states'] else ["All"]
+            }
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        print("Database connection failed:", e)
+    return knowledge
 
 def calculate_suitability(metric_val, ideal_min, ideal_max):
     if metric_val is None:
@@ -81,6 +84,8 @@ def recommend_crop():
     
     # Calculate scores for all crops
     results = []
+    
+    CROP_KNOWLEDGE = fetch_crop_knowledge()
     
     for crop, conditions in CROP_KNOWLEDGE.items():
         # Check season compatibility if season input provided

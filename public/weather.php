@@ -14,7 +14,7 @@ session_start();
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/weather.css">
 </head>
-<body style="background-color: var(--bg-main);">
+<body style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);">
     <!-- Navigation -->
     <nav class="navbar scrolled" id="navbar" style="background:var(--bg-surface);">
         <div class="container nav-container">
@@ -39,14 +39,14 @@ session_start();
         </div>
     </nav>
 
-    <div class="container" style="margin-top: 100px; padding: 2rem 1rem;">
-        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+    <div class="container" style="margin-top: 100px; padding: 3rem 1rem;">
+        <div class="section-header" style="text-align: left; margin-bottom: 3rem;">
             <h2>Agricultural <span class="highlight">Weather Insights</span></h2>
-            <p>Real-time meteorological data and 7-day accurate forecasts to optimize your farming schedule.</p>
+            <p style="color: #475569; font-size: 1.1rem;">Real-time meteorological data and 7-day accurate forecasts to optimize your farming schedule.</p>
         </div>
 
         <!-- Controls -->
-        <div class="form-card mb-4" style="background:white; display:flex; gap:1rem; align-items:flex-end; flex-wrap:wrap; padding: 1.5rem;">
+        <div class="form-card" style="background:white; display:flex; gap:1.5rem; align-items:flex-end; flex-wrap:wrap; padding: 2.5rem; border-radius: 20px; border:none; box-shadow: 0 15px 35px rgba(0,0,0,0.03); margin-bottom: 3.5rem;">
             <div class="form-group" style="flex:1; min-width:250px; margin-bottom:0;">
                 <label><i class="fa-solid fa-location-dot"></i> Search Location</label>
                 <div style="display:flex; gap:0.5rem;">
@@ -120,8 +120,10 @@ session_start();
             </div>
 
             <!-- Deep 6-Day Forecast -->
-            <div class="forecast-container" style="background:white;">
-                <h3 class="mb-4" style="color:var(--primary-dark); font-family:'Playfair Display'; font-size:1.75rem; text-align: center;">Deep 6-Day Forecast & Precipitation</h3>
+            <div class="forecast-container" style="background:white; grid-column: 1 / -1; border-top: 4px solid var(--primary-light);">
+                <h3 class="mb-4" style="color:var(--primary-dark); font-family:'Playfair Display'; font-size:1.5rem; text-align: center;">
+                    <i class="fa-regular fa-calendar-days" style="color:#0ea5e9; margin-right: 8px;"></i>Deep 6-Day Forecast & Precipitation
+                </h3>
                 <div class="forecast-row" id="forecast-row">
                     <!-- Populated natively by JS -->
                     <div style="padding:2rem; width:100%; text-align:center; color:var(--text-muted);"><i class="fa-solid fa-circle-notch fa-spin"></i> Fetching meteorological arrays...</div>

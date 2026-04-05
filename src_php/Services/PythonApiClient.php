@@ -44,7 +44,11 @@ class PythonApiClient
 
         $response = curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+        $curl_error = curl_error($ch);
+
+        if ($curl_error) {
+            return null;
+        }
 
         if ($http_code == 200 && $response) {
             $data = json_decode($response, true);
@@ -53,12 +57,8 @@ class PythonApiClient
             }
         }
 
-        // Return mock data if python API is unavailable to keep frontend working
-        return [
-            ['crop' => 'Wheat', 'match_score' => 95.5],
-            ['crop' => 'Maize', 'match_score' => 82.1],
-            ['crop' => 'Mustard', 'match_score' => 74.3]
-        ];
+        // Return null if python API is unavailable or returns an error
+        return null;
     }
 }
 ?>
