@@ -197,22 +197,24 @@ async function fetchWeather(coordsStr) {
         const hourlyRow = document.getElementById('hourly-row');
         hourlyRow.innerHTML = '';
         
-        // Find current hour index dynamically based on local time matching the API's timezone
-        const nowTime = new Date().getTime();
+        // Find current hour index dynamically based on location's current time
+        const currentTargetTimeStr = data.current.time; // Provided by Open-Meteo as ISO8601 in location's TZ
+        const currentTargetTime = Date.parse(currentTargetTimeStr + "Z"); // Parse as UTC to measure absolute difference safely
+        
         let currentIndex = 0;
         let minDiff = Infinity;
         for(let i = 0; i < data.hourly.time.length; i++) {
-            const hTime = new Date(data.hourly.time[i]).getTime();
-            if(Math.abs(hTime - nowTime) < minDiff) {
-                minDiff = Math.abs(hTime - nowTime);
+            const hTime = Date.parse(data.hourly.time[i] + "Z");
+            if(Math.abs(hTime - currentTargetTime) < minDiff) {
+                minDiff = Math.abs(hTime - currentTargetTime);
                 currentIndex = i;
             }
         }
 
         // Render exactly next 24 hours into the horizontally scrolling container
         for(let i = currentIndex; i < currentIndex + 24 && i < data.hourly.time.length; i++) {
-            const hTimeObj = new Date(data.hourly.time[i]);
-            let hours = hTimeObj.getHours();
+            const timeStr = data.hourly.time[i]; // e.g. "2024-04-05T14:00"
+            let hours = parseInt(timeStr.substring(11, 13), 10);
             const ampm = hours >= 12 ? 'PM' : 'AM';
             hours = hours % 12 || 12; // Formatter: 12hr clock
             
