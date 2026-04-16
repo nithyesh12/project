@@ -247,6 +247,7 @@ if (!isset($_SESSION['user_id'])) {
         </div>
         <ul class="sidebar-menu">
             <li><a href="dashboard.php"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+            <li><a href="cosmetic_uses.php"><i class="fa-solid fa-spa"></i> Cosmetic Uses</a></li>
             <li><a href="crops.php"><i class="fa-solid fa-book-open"></i> Crop Encyclopedia</a></li>
             <li><a href="recommendation.php"><i class="fa-solid fa-wand-magic-sparkles"></i> Recommendations</a></li>
             <li><a href="myfarm.php" class="active"><i class="fa-solid fa-tractor"></i> My Farm</a></li>

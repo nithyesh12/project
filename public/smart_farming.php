@@ -403,6 +403,7 @@ if (!isset($_SESSION['user_id'])) {
         <ul class="sidebar-menu">
             <li><a href="index.html"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
             <li><a href="dashboard.php"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="cosmetic_uses.php"><i class="fa-solid fa-spa"></i> Cosmetic Uses</a></li>
             <li><a href="crops.php"><i class="fa-solid fa-book-open"></i> Crop Encyclopedia</a></li>
             <li><a href="recommendation.php"><i class="fa-solid fa-wand-magic-sparkles"></i> Recommendations</a></li>
             <li><a href="weather.php"><i class="fa-solid fa-cloud-sun"></i> Weather Insights</a></li>

@@ -95,19 +95,31 @@ def recommend_crop():
     
     for crop, conditions in CROP_KNOWLEDGE.items():
         # Check season compatibility if season input provided
-        if season_input and isinstance(season_input, str):
-            if season_input.capitalize() not in conditions['season']:
+        if season_input and isinstance(season_input, str) and season_input.lower() != 'all':
+            # The frontend sends "Rabi (Winter: Oct - Mar)" instead of "Rabi"
+            # We extract just the main season name: "Rabi"
+            base_season = season_input.split(' ')[0].capitalize()
+            # Also handle if the crop season in db is completely lowercase
+            crop_seasons_normalized = [s.capitalize() for s in conditions['season']]
+            if base_season not in crop_seasons_normalized and "All" not in crop_seasons_normalized:
                 # Zero score if completely wrong season
                 continue
                 
         # Evaluate strict state compatibility mapping
-        if state and isinstance(state, str):
+        if state and isinstance(state, str) and state.lower() != 'all':
             allowed_states = conditions.get('states', ['All'])
-            if "All" not in allowed_states and state not in allowed_states:
-                # Highly incompatible regional geographic crop
-                continue
-                
-        scores = []
+            # Since the database has incomplete state data (many states like Goa are missing),
+            # we will not strictly drop the crop. 
+            # We can softly match it or simply allow the environmental parameters to dictate suitability.
+            state_matched = any(state.lower() in s.lower() or s.lower() == 'all' for s in allowed_states)
+            if not state_matched:
+                # Apply a minor penalty instead of completely eliminating the crop
+                # This ensures users in states not listed in the JSON still get recommendations
+                scores = [80] # Start with a lower baseline score due to regional unlikelihood
+            else:
+                scores = []
+        else:
+            scores = []
         if ph is not None:
             scores.append(calculate_suitability(ph, conditions["ph"][0], conditions["ph"][1]))
         if temp is not None:

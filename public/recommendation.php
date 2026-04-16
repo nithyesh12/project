@@ -31,6 +31,7 @@ if (!isset($_SESSION['user_id'])) {
                 <li><a href="crops.php">Crop Encyclopedia</a></li>
                 <li><a href="recommendation.php" class="active">AI Recommendation</a></li>
                 <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="cosmetic_uses.php">Cosmetic Uses</a></li>
                 <li>
                     <div style="display: flex; align-items: center; gap: 1rem;">
                         <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--border-color); padding: 0.5rem 1rem; border-radius: 9999px;">

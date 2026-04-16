@@ -50,6 +50,7 @@ $is_logged_in = isset($_SESSION['user_id']);
                 <li><a href="crops.php" class="active">Crop Encyclopedia</a></li>
                 <li><a href="recommendation.php">AI Recommendation</a></li>
                 <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="cosmetic_uses.php">Cosmetic Uses</a></li>
                 
                 <?php if($is_logged_in): ?>
                 <li>

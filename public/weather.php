@@ -28,6 +28,7 @@ session_start();
                 <li><a href="recommendation.php">Recommendations</a></li>
                 <li><a href="weather.php" class="active" style="color:var(--primary-color);">Weather <i class="fa-solid fa-cloud-sun"></i></a></li>
                 <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="cosmetic_uses.php">Cosmetic Uses</a></li>
                 <li id="auth-links">
                     <?php if(isset($_SESSION['user_id'])): ?>
                         <a href="javascript:void(0)" onclick="handleLogout()" class="btn btn-outline" style="color:var(--error-color); border-color:var(--error-color)">Sign Out</a>

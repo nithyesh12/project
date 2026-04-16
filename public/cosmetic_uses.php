@@ -8,7 +8,7 @@ $is_logged_in = isset($_SESSION['user_id']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crop Encyclopedia - Grow Your Crops India</title>
+    <title>Cosmetic Uses of Crops - Grow Your Crops India</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -22,13 +22,60 @@ $is_logged_in = isset($_SESSION['user_id']);
             flex: 1; min-width: 200px;
         }
         .crop-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;
         }
         .crop-card {
-            cursor: pointer; position: relative;
+            background: var(--bg-surface); 
+            border-radius: var(--border-radius); 
+            overflow: hidden; 
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
-        .view-more-container { text-align: center; margin: 3rem 0; }
+        .crop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+        .crop-img {
+            width: 100%; height: 200px; object-fit: cover;
+        }
+        .card-content {
+            padding: 1.5rem;
+        }
+        .card-subtitle {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .card-title {
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .use-icon {
+            color: var(--secondary-color);
+            margin-right: 0.5rem;
+        }
+        .detail-item {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
         .hidden { display: none !important; }
+        .error-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            background: #fff3cd;
+            color: #856404;
+            border-radius: var(--border-radius);
+        }
     </style>
 </head>
 <body style="padding-top: 80px; background-color: var(--bg-main);">
@@ -42,10 +89,10 @@ $is_logged_in = isset($_SESSION['user_id']);
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="crops.php" class="active">Crop Encyclopedia</a></li>
+                <li><a href="crops.php">Crop Encyclopedia</a></li>
                 <li><a href="recommendation.php">AI Recommendation</a></li>
                 <li><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="cosmetic_uses.php">Cosmetic Uses</a></li>
+                <li><a href="cosmetic_uses.php" class="active">Cosmetic Uses</a></li>
                 
                 <?php if($is_logged_in): ?>
                 <li>
@@ -64,33 +111,28 @@ $is_logged_in = isset($_SESSION['user_id']);
 
     <main class="container" style="padding: 3rem 1.5rem;">
         <div class="section-header">
-            <span class="badge" style="margin-bottom: 1rem;"><i class="fa-solid fa-book-open"></i> Huge Library</span>
-            <h2>Crop <span class="highlight">Encyclopedia</span></h2>
-            <p>Explore detailed cultivation practices, soil requirements, and ideal climates for over 50 native Indian crops.</p>
+            <span class="badge" style="margin-bottom: 1rem;"><i class="fa-solid fa-spa"></i> Natural Beauty</span>
+            <h2>Cosmetic <span class="highlight">Uses of Crops</span></h2>
+            <p>Discover the incredible skincare, hair care, and medicinal benefits hidden in everyday agricultural crops.</p>
         </div>
 
         <!-- Filters -->
         <div class="filter-container animate-fade-in">
-            <input type="text" id="searchInput" placeholder="Search crop by name (e.g. Rice, Mango)...">
-            <select id="seasonFilter">
-                <option value="All">All Seasons</option>
-                <option value="Kharif">Kharif (Monsoon)</option>
-                <option value="Rabi">Rabi (Winter)</option>
-                <option value="Zaid">Zaid (Summer)</option>
-                <option value="Perennial">Perennial</option>
+            <input type="text" id="searchInput" placeholder="Search by crop name (e.g. Turmeric, Aloe Vera)...">
+            <select id="categoryFilter">
+                <option value="All">All Categories</option>
+                <option value="Skin Care">Skin Care</option>
+                <option value="Hair Care">Hair Care</option>
+                <option value="Medicinal">Medicinal</option>
             </select>
         </div>
 
         <!-- Grid -->
-        <div id="cropGrid" class="crop-grid animate-fade-in delay-1">
-            <!-- Crops injected via JS -->
+        <div id="cosmeticsGrid" class="crop-grid animate-fade-in delay-1">
+            <!-- Data injected via JS -->
+            <div style="grid-column: 1 / -1; text-align: center;"><i class="fa-solid fa-spinner fa-spin"></i> Loading cosmetic data...</div>
         </div>
 
-        <div class="view-more-container animate-fade-in delay-2">
-            <button id="loadMoreBtn" class="btn btn-primary btn-large">
-                <i class="fa-solid fa-angles-down"></i> View More Crops
-            </button>
-        </div>
     </main>
 
     <footer>
@@ -99,7 +141,7 @@ $is_logged_in = isset($_SESSION['user_id']);
         </div>
     </footer>
 
-    <script src="assets/js/encyclopedia.js"></script>
+    <script src="assets/js/cosmetics.js"></script>
     <script>
         async function logout() {
             try {
