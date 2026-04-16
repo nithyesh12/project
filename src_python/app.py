@@ -5,33 +5,39 @@ import mysql.connector
 app = Flask(__name__)
 CORS(app)
 
+import os
+import json
+import re
+
 def fetch_crop_knowledge():
     knowledge = {}
     try:
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="growyourcrops"
-        )
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM crops")
-        crops = cursor.fetchall()
+        json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'public', 'assets', 'data', 'crops.json')
+        with open(json_path, 'r', encoding='utf-8') as f:
+            crops = json.load(f)
+            
         for c in crops:
-            knowledge[c['crop_name']] = {
-                "ph": (c['ph_min'] if c['ph_min'] is not None else 0.0, c['ph_max'] if c['ph_max'] is not None else 14.0),
-                "temp": (c['temp_min'] if c['temp_min'] is not None else 0.0, c['temp_max'] if c['temp_max'] is not None else 50.0),
-                "rain": (c['rain_min'] if c['rain_min'] is not None else 0.0, c['rain_max'] if c['rain_max'] is not None else 5000.0),
-                "n": (c['n_min'] if c['n_min'] is not None else 0.0, c['n_max'] if c['n_max'] is not None else 500.0),
-                "season": [s.strip() for s in c['seasons'].split(",")] if c['seasons'] else ["All"],
-                "states": [s.strip() for s in c['states'].split(",")] if c['states'] else ["All"]
-            }
-        cursor.close()
-        conn.close()
-    except Exception as e:
-        print("Database connection failed:", e)
-    return knowledge
+            # Helper to parse strings like "6.0 - 7.5"
+            def parse_range(val_str, default_min, default_max):
+                if not val_str: return (default_min, default_max)
+                numbers = re.findall(r"[-+]?\d*\.\d+|\d+", str(val_str))
+                if len(numbers) >= 2:
+                    return (float(numbers[0]), float(numbers[1]))
+                elif len(numbers) == 1:
+                    return (float(numbers[0]), float(numbers[0]))
+                return (default_min, default_max)
 
+            knowledge[c.get('name', 'Unknown')] = {
+                "ph": parse_range(c.get('ph_range'), 0.0, 14.0),
+                "temp": parse_range(c.get('temp_range'), 0.0, 50.0),
+                "rain": parse_range(c.get('rainfall_range'), 0.0, 5000.0),
+                "n": (0.0, 500.0), # Default fallback as JSON doesn't track nitrogen
+                "season": [s.strip() for s in c.get('season', 'All').split(",")] if c.get('season') else ["All"],
+                "states": [s.strip() for s in c.get('suitable_states', 'All').split(",")] if c.get('suitable_states') else ["All"]
+            }
+    except Exception as e:
+        print("Failed to load crop knowledge:", e)
+    return knowledge
 def calculate_suitability(metric_val, ideal_min, ideal_max):
     if metric_val is None:
         return 100 # Ignore if not provided
