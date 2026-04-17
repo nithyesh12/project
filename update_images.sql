@@ -99,3 +99,6 @@ UPDATE crops SET image_url = 'assets/images/crops/betel_vine.jpg' WHERE crop_nam
 UPDATE crops SET image_url = 'assets/images/crops/aloe_vera.jpg' WHERE crop_name = 'Aloe Vera';
 UPDATE crops SET image_url = 'assets/images/crops/cocoa.jpg' WHERE crop_name = 'Cocoa';
 UPDATE crops SET image_url = 'assets/images/crops/chilli_pepper.jpg' WHERE crop_name = 'Chili Pepper';
+UPDATE crops SET image_url = 'assets/images/crops/neem.jpg' WHERE crop_name = 'Neem';
+UPDATE crops SET image_url = 'assets/images/crops/rose.jpg' WHERE crop_name = 'Rose';
+UPDATE crops SET image_url = 'assets/images/crops/sandalwood.jpg' WHERE crop_name = 'Sandalwood';

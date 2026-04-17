@@ -73,29 +73,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     locateBtn.addEventListener('click', () => {
+        locateBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Locating...';
+
+        const fallbackToIP = async () => {
+             try {
+                 const res = await fetch('https://get.geojs.io/v1/ip/geo.json');
+                 const data = await res.json();
+                 currentCoords = `${data.latitude},${data.longitude}`;
+                 cityInput.value = `📍 ${data.city || 'Your Location'}`;
+                 await fetchWeather(currentCoords);
+             } catch (err) {
+                 alert("Location access completely blocked and IP-fallback failed. Please use the search bar manually.");
+             } finally {
+                 locateBtn.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> Auto Detect';
+             }
+        };
+
         if ("geolocation" in navigator) {
-            locateBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Locating...';
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
                     currentCoords = `${lat},${lon}`;
                     
-                    cityInput.value = "📍 Your Current Location";
+                    cityInput.value = "📍 Exact GPS Location";
                     
-                    fetchWeather(currentCoords);
-                    locateBtn.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> Auto Detect';
+                    fetchWeather(currentCoords).then(() => {
+                        locateBtn.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> Auto Detect';
+                    });
                 },
                 (error) => {
-                    let msg = "Location error.";
-                    if(error.code === 1) msg = "Location access denied by user.";
-                    alert(msg + " Please use the search bar manually.");
-                    locateBtn.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> Auto Detect';
+                    // Fallback natively to IP-based inference if prompt is denied or HTTP unsecured protocol limits it
+                    fallbackToIP();
                 },
-                { timeout: 10000 }
+                { timeout: 6000 }
             );
         } else {
-            alert("Geolocation is not natively supported by your browser.");
+            fallbackToIP();
         }
     });
 });
@@ -131,8 +145,8 @@ function getWeatherInfo(code) {
 async function fetchWeather(coordsStr) {
     const [lat, lon] = coordsStr.split(',');
     
-    // Core Engine Call - NO API KEY REQUIRED - 100% Free
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&hourly=temperature_2m,precipitation_probability,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto`;
+    // Core Engine Call
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,surface_pressure,wind_speed_10m,visibility&hourly=temperature_2m,precipitation_probability,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_sum&timezone=auto`;
     
     try {
         const response = await fetch(url);
@@ -143,16 +157,55 @@ async function fetchWeather(coordsStr) {
         const current = data.current;
         const info = getWeatherInfo(current.weather_code);
         
+        // Dynamic MSN Background Logic
+        const isDay = current.is_day === 1;
+        const code = current.weather_code;
+        let bgClass = isDay ? 'bg-clear-day' : 'bg-clear-night';
+        if([1,2,3].includes(code)) bgClass = isDay ? 'bg-cloudy-day' : 'bg-cloudy-night';
+        if([51,53,55,61,63,65,80,81,82].includes(code)) bgClass = 'bg-rainy';
+        if([95,96,99].includes(code)) bgClass = 'bg-storm';
+        if([71,73,75].includes(code)) bgClass = 'bg-snow';
+        
+        document.body.className = bgClass;
+        
+        // Hero Update
         document.getElementById('current-temp').innerText = Math.round(current.temperature_2m);
         document.getElementById('current-desc').innerText = info.desc;
-        
         const iconEl = document.getElementById('current-icon');
         iconEl.className = `fa-solid ${info.icon} weather-main-icon`;
+        if(info.color) iconEl.style.color = info.color; // Give icon color on transparent bg if available
         
+        document.getElementById('current-feels').innerText = Math.round(current.apparent_temperature);
+        document.getElementById('day-high').innerText = Math.round(data.daily.temperature_2m_max[0]);
+        document.getElementById('day-low').innerText = Math.round(data.daily.temperature_2m_min[0]);
+        document.getElementById('current-vis').innerText = (current.visibility / 1000).toFixed(1);
+        
+        // Tiles Update
         document.getElementById('current-humidity').innerText = `${current.relative_humidity_2m}%`;
         document.getElementById('current-wind').innerText = `${current.wind_speed_10m} km/h`;
         document.getElementById('current-rain').innerText = `${data.daily.precipitation_sum[0]} mm`;
-        document.getElementById('current-elevation').innerText = `${data.elevation} m`;
+        document.getElementById('current-pressure').innerText = `${Math.round(current.surface_pressure)} hPa`;
+        
+        const uv = data.daily.uv_index_max[0];
+        document.getElementById('current-uv').innerText = uv ? uv.toFixed(1) : '0';
+        let uvDesc = 'Low';
+        if(uv >= 3) uvDesc = 'Moderate';
+        if(uv >= 6) uvDesc = 'High';
+        if(uv >= 8) uvDesc = 'Very High';
+        document.getElementById('uv-desc').innerText = uvDesc;
+        
+        // Sunrise / Sunset parsing
+        const formatTime = (isoString) => {
+            const date = new Date(isoString);
+            let hours = date.getHours();
+            let mins = date.getMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            mins = mins < 10 ? '0'+mins : mins;
+            return `${hours}:${mins}`; // AM/PM handled by hardcoded html
+        };
+        document.getElementById('sunrise-time').innerText = formatTime(data.daily.sunrise[0]);
+        document.getElementById('sunset-time').innerText = formatTime(data.daily.sunset[0]);
         
         // --- 2. Advanced Agricultural Alert Logic ---
         const alertsPanel = document.getElementById('weather-alerts');
@@ -162,34 +215,15 @@ async function fetchWeather(coordsStr) {
         for(let i=0; i<3; i++) rainTotal3Days += data.daily.precipitation_sum[i] || 0;
         
         if(rainTotal3Days > 50) {
-            alertsPanel.innerHTML += `<div class="alert alert-error" style="background:#fee2e2; color:#991b1b; padding:1.2rem; border-left:5px solid #ef4444; margin-bottom:1rem; border-radius:8px;">
+            alertsPanel.innerHTML += `<div class="alert alert-error glass-panel" style="background:rgba(254,226,226,0.9); color:#991b1b; padding:1.2rem; border-left:5px solid #ef4444; margin-bottom:1rem;">
                 <i class="fa-solid fa-triangle-exclamation" style="font-size:1.5rem; float:left; margin-right:1rem;"></i> 
-                <div><strong>HEAVY RAIN ALERT:</strong> Expected ${rainTotal3Days.toFixed(1)}mm of cumulative rain exactly over the next 3 processing days. Secure harvested crops and assure drainage canals are fully clear to aggressively prevent waterlogging damages.</div>
+                <div><strong>HEAVY RAIN ALERT:</strong> Expected ${rainTotal3Days.toFixed(1)}mm of cumulative rain exactly over the next 3 processing days. Secure harvested crops.</div>
             </div>`;
         }
         if(current.temperature_2m > 38) {
-            alertsPanel.innerHTML += `<div class="alert alert-error" style="background:#fff7ed; color:#9a3412; padding:1.2rem; border-left:5px solid #f97316; margin-bottom:1rem; border-radius:8px;">
+            alertsPanel.innerHTML += `<div class="alert alert-error glass-panel" style="background:rgba(255,247,237,0.9); color:#9a3412; padding:1.2rem; border-left:5px solid #f97316; margin-bottom:1rem;">
                 <i class="fa-solid fa-temperature-arrow-up" style="font-size:1.5rem; float:left; margin-right:1rem;"></i> 
-                <div><strong>HEATWAVE WARNING:</strong> Peak surface temperatures exceeding native limits. Immediately increase irrigation frequency cycles to prevent intense moisture stress on vulnerable vegetations.</div>
-            </div>`;
-        }
-        if(rainTotal3Days < 2 && current.temperature_2m > 32) {
-            alertsPanel.innerHTML += `<div class="alert alert-warning" style="background:#fefce8; color:#c2410c; padding:1.2rem; border-left:5px solid #f59e0b; margin-bottom:1rem; border-radius:8px;">
-                <i class="fa-solid fa-sun-plant-wilt" style="font-size:1.5rem; float:left; margin-right:1rem;"></i> 
-                <div><strong>IMPENDING DRY SPELL:</strong> No valid measurable precipitation indicated while temperatures remain actively elevated. Closely monitor base soil moisture parameters actively.</div>
-            </div>`;
-        }
-        if(current.wind_speed_10m > 35) {
-            alertsPanel.innerHTML += `<div class="alert alert-warning" style="background:#f1f5f9; color:#334155; padding:1.2rem; border-left:5px solid #64748b; margin-bottom:1rem; border-radius:8px;">
-                <i class="fa-solid fa-wind" style="font-size:1.5rem; float:left; margin-right:1rem;"></i> 
-                <div><strong>GALE WARNING:</strong> High speed ground winds detected natively. Protect tall standing structural crops (like Banana or Sugarcane) against heavy lodging.</div>
-            </div>`;
-        }
-
-        // Default Clear message if architecture is completely stable
-        if(alertsPanel.innerHTML === '') {
-            alertsPanel.innerHTML = `<div class="alert alert-success" style="background:#ecfdf5; color:#065f46; padding:1rem; border-radius:8px; border:1px solid #a7f3d0;">
-                <i class="fa-solid fa-circle-check"></i> Weather conditions are fundamentally optimal for generic farming frameworks. No active alerts.
+                <div><strong>HEATWAVE WARNING:</strong> Peak surface temperatures exceeding native limits. Immediately increase irrigation frequency cycles.</div>
             </div>`;
         }
 
@@ -197,9 +231,8 @@ async function fetchWeather(coordsStr) {
         const hourlyRow = document.getElementById('hourly-row');
         hourlyRow.innerHTML = '';
         
-        // Find current hour index dynamically based on location's current time
-        const currentTargetTimeStr = data.current.time; // Provided by Open-Meteo as ISO8601 in location's TZ
-        const currentTargetTime = Date.parse(currentTargetTimeStr + "Z"); // Parse as UTC to measure absolute difference safely
+        const currentTargetTimeStr = data.current.time; 
+        const currentTargetTime = Date.parse(currentTargetTimeStr + "Z"); 
         
         let currentIndex = 0;
         let minDiff = Infinity;
@@ -211,12 +244,11 @@ async function fetchWeather(coordsStr) {
             }
         }
 
-        // Render exactly next 24 hours into the horizontally scrolling container
         for(let i = currentIndex; i < currentIndex + 24 && i < data.hourly.time.length; i++) {
-            const timeStr = data.hourly.time[i]; // e.g. "2024-04-05T14:00"
+            const timeStr = data.hourly.time[i];
             let hours = parseInt(timeStr.substring(11, 13), 10);
             const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12; // Formatter: 12hr clock
+            hours = hours % 12 || 12;
             
             let timeLabel = i === currentIndex ? "Now" : `${hours} ${ampm}`;
             const hTemp = Math.round(data.hourly.temperature_2m[i]);
@@ -224,17 +256,14 @@ async function fetchWeather(coordsStr) {
             const hCode = data.hourly.weather_code[i];
             const hInfo = getWeatherInfo(hCode);
             
-            const isCurrent = (i === currentIndex);
-            
-            const cardHtml = `
-                <div style="min-width:105px; padding:1.2rem 1rem; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:space-between; text-align:center; background:${isCurrent ? 'var(--primary-color)' : '#f8fafc'}; color:${isCurrent ? 'white' : 'var(--text-main)'}; border:1px solid ${isCurrent ? 'var(--primary-dark)' : '#e2e8f0'}; box-shadow:${isCurrent ? '0 4px 10px rgba(5,150,105,0.2)' : 'none'}; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <span style="font-size:0.9rem; font-weight:600; color:${isCurrent ? 'rgba(255,255,255,0.9)' : 'var(--primary-dark)'}; margin-bottom:0.5rem;">${timeLabel}</span>
-                    <i class="fa-solid ${hInfo.icon}" style="font-size:2rem; color:${isCurrent ? '#fff' : hInfo.color}; margin-bottom:0.5rem; filter:${isCurrent ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' : 'none'}"></i>
-                    <span style="font-size:1.3rem; font-weight:700; margin-bottom:0.25rem;">${hTemp}°C</span>
-                    <span style="font-size:0.85rem; font-weight:500; color:${isCurrent ? 'rgba(255,255,255,0.8)' : '#3b82f6'};"><i class="fa-solid fa-droplet"></i> ${hRain}%</span>
+            hourlyRow.innerHTML += `
+                <div class="hourly-card">
+                    <span class="hourly-time">${timeLabel}</span>
+                    <i class="fa-solid ${hInfo.icon} hourly-icon" style="color:${hInfo.color}"></i>
+                    <span class="hourly-temp">${hTemp}°</span>
+                    <span class="hourly-rain"><i class="fa-solid fa-droplet"></i> ${hRain}%</span>
                 </div>
             `;
-            hourlyRow.innerHTML += cardHtml;
         }
 
         // --- 4. 6-Day Predictive Forecast Implementation ---
@@ -255,21 +284,20 @@ async function fetchWeather(coordsStr) {
             const minTemp = Math.round(daily.temperature_2m_min[i]);
             const rainMM = daily.precipitation_sum[i];
             
-            const card = document.createElement('div');
-            card.className = 'forecast-card';
-            card.innerHTML = `
-                <div class="forecast-day">${dayName}</div>
-                <i class="fa-solid ${stateInfo.icon} forecast-icon" style="color: ${stateInfo.color}"></i>
-                <div class="forecast-temp">${maxTemp}°<span style="font-size:0.9rem; color:#94a3b8; font-weight:normal; margin-left:4px;">${minTemp}°</span></div>
-                <div class="forecast-rain" style="opacity: ${rainMM > 0 ? 1 : 0.4}"><i class="fa-solid fa-droplet"></i> ${rainMM}mm</div>
+            forecastRow.innerHTML += `
+                <div class="daily-row">
+                    <div class="d-day">${dayName}</div>
+                    <div class="d-icon"><i class="fa-solid ${stateInfo.icon}" style="color: ${stateInfo.color}"></i></div>
+                    <div class="d-temps">${maxTemp}°<span class="d-min">${minTemp}°</span></div>
+                    <div class="d-rain" style="opacity: ${rainMM > 0 ? 1 : 0.4}"><i class="fa-solid fa-droplet"></i> ${rainMM}mm</div>
+                </div>
             `;
-            forecastRow.appendChild(card);
         }
         
     } catch(err) {
         console.error("Open-Meteo Engine Offline:", err);
-        document.getElementById('weather-alerts').innerHTML = `<div class="alert alert-error" style="background:#fef2f2; color:#991b1b; padding:1rem;">
-            <i class="fa-solid fa-server"></i> Unable to connect to the global meteorological data-grid. Check your specific connection architecture.
+        document.getElementById('weather-alerts').innerHTML = `<div class="alert alert-error glass-panel" style="background:rgba(254,226,226,0.9); color:#991b1b; padding:1rem;">
+            <i class="fa-solid fa-server"></i> Unable to connect to the global meteorological data-grid. Check your connection architecture.
         </div>`;
     }
 }

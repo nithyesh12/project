@@ -1,6 +1,6 @@
 @echo off
 echo ===================================================
-echo    Starting Grow Your Crops India Application
+echo    Starting GROW YOUR CROPS Application
 echo ===================================================
 echo.
 

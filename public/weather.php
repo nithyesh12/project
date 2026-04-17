@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Insights - Grow Your Crops India</title>
+    <title>Weather Insights - GROW YOUR CROPS</title>
     <!-- Google Fonts & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,13 +14,13 @@ session_start();
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/weather.css">
 </head>
-<body style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);">
+<body class="bg-clear-day">
     <!-- Navigation -->
-    <nav class="navbar scrolled" id="navbar" style="background:var(--bg-surface);">
+    <nav class="navbar" id="navbar" style="background: rgba(255,255,255,0.1) !important; backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 0;">
         <div class="container nav-container">
             <a href="index.html" class="logo">
                 <i class="fa-solid fa-leaf"></i>
-                <span>GrowYourCrops<span class="highlight">India</span></span>
+                <span>Grow Your Crops</span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -47,7 +47,7 @@ session_start();
         </div>
 
         <!-- Controls -->
-        <div class="form-card" style="background:white; display:flex; gap:1.5rem; align-items:flex-end; flex-wrap:wrap; padding: 2.5rem; border-radius: 20px; border:none; box-shadow: 0 15px 35px rgba(0,0,0,0.03); margin-bottom: 3.5rem;">
+        <div class="form-card glass-panel" style="display:flex; gap:1.5rem; align-items:flex-end; flex-wrap:wrap; padding: 2.5rem; border:1px solid rgba(255,255,255,0.2);">
             <div class="form-group" style="flex:1; min-width:250px; margin-bottom:0;">
                 <label><i class="fa-solid fa-location-dot"></i> Search Location</label>
                 <div style="display:flex; gap:0.5rem;">
@@ -63,71 +63,77 @@ session_start();
         <div id="weather-alerts" class="mb-4"></div>
 
         <!-- Main Weather Display -->
-        <div class="weather-layout">
-            <!-- Current Weather Card -->
-            <div class="current-weather-card">
-                <h3 style="color:white; margin-bottom:1.5rem; font-family:'Outfit'; font-weight:600;"><i class="fa-solid fa-location-arrow"></i> Current Conditions</h3>
-                <div class="current-main">
-                    <div class="icon-temp" style="display:flex; align-items:center; gap:1.5rem; justify-content:center;">
-                        <i id="current-icon" class="fa-solid fa-spinner fa-spin weather-main-icon"></i>
-                        <div class="temp-display">
-                            <span id="current-temp">--</span>°C
-                        </div>
+        <div class="msn-weather-layout">
+            <!-- Hero / Current Weather Panel -->
+            <div class="msn-hero-panel glass-panel">
+                <div class="hero-left">
+                    <div class="hero-temp-wrapper">
+                        <h1 id="current-temp" class="hugetemp">--</h1><span class="deg-symbol">°C</span>
                     </div>
-                    <div id="current-desc" class="weather-desc">Initializing Data Engine...</div>
+                    <div class="hero-desc">
+                        <i id="current-icon" class="fa-solid fa-spinner fa-spin"></i>
+                        <span id="current-desc">Initializing...</span>
+                    </div>
                 </div>
-                
-                <div class="weather-details-grid mt-4">
-                    <div class="weather-detail-item">
-                        <div class="wd-icon"><i class="fa-solid fa-droplet"></i></div>
-                        <div>
-                            <p class="detail-label">Relative Humidity</p>
-                            <p class="detail-value" id="current-humidity">--%</p>
-                        </div>
-                    </div>
-                    <div class="weather-detail-item">
-                        <div class="wd-icon"><i class="fa-solid fa-wind"></i></div>
-                        <div>
-                            <p class="detail-label">Wind Speed</p>
-                            <p class="detail-value" id="current-wind">-- km/h</p>
-                        </div>
-                    </div>
-                    <div class="weather-detail-item">
-                        <div class="wd-icon"><i class="fa-solid fa-cloud-rain"></i></div>
-                        <div>
-                            <p class="detail-label">Forecast Rainfall</p>
-                            <p class="detail-value" id="current-rain">-- mm</p>
-                        </div>
-                    </div>
-                    <div class="weather-detail-item">
-                        <div class="wd-icon"><i class="fa-solid fa-mountain-sun"></i></div>
-                        <div>
-                            <p class="detail-label">Elevation</p>
-                            <p class="detail-value" id="current-elevation">-- m</p>
-                        </div>
+                <div class="hero-right">
+                    <p class="feels-like">Feels like <span id="current-feels">--</span>°</p>
+                    <p class="high-low">Day <span id="day-high">--</span>° &bull; Night <span id="day-low">--</span>°</p>
+                    <p class="visibility-sum"><i class="fa-solid fa-eye"></i> Visibility: <span id="current-vis">--</span> km</p>
+                </div>
+            </div>
+
+            <!-- Detailed Current Conditions Tiles Grid -->
+            <div class="msn-details-grid">
+                <div class="msn-tile glass-panel">
+                    <div class="tile-header"><i class="fa-solid fa-droplet"></i> Humidity</div>
+                    <div class="tile-body" id="current-humidity">--%</div>
+                    <div class="tile-foot">Moisture Level</div>
+                </div>
+                <div class="msn-tile glass-panel">
+                    <div class="tile-header"><i class="fa-solid fa-wind"></i> Wind</div>
+                    <div class="tile-body" id="current-wind">-- km/h</div>
+                    <div class="tile-foot">Surface Level Speed</div>
+                </div>
+                <div class="msn-tile glass-panel">
+                    <div class="tile-header"><i class="fa-solid fa-sun"></i> UV Index</div>
+                    <div class="tile-body" id="current-uv">--</div>
+                    <div class="tile-foot" id="uv-desc">Loading...</div>
+                </div>
+                <div class="msn-tile glass-panel">
+                    <div class="tile-header"><i class="fa-solid fa-cloud-showers-water"></i> Rain Forecast</div>
+                    <div class="tile-body" id="current-rain">-- mm</div>
+                    <div class="tile-foot">Next 24 Hours</div>
+                </div>
+                <div class="msn-tile glass-panel">
+                    <div class="tile-header"><i class="fa-solid fa-stopwatch"></i> Air Pressure</div>
+                    <div class="tile-body" id="current-pressure">-- hPa</div>
+                    <div class="tile-foot">Surface Level</div>
+                </div>
+                <div class="msn-tile glass-panel">
+                    <div class="tile-header"><i class="fa-solid fa-cloud-sun"></i> Sun Cycle</div>
+                    <div class="tile-body sunrise-set">
+                        <div class="sun-item"><i class="fa-solid fa-sun" style="color: #fbbf24;"></i> <span id="sunrise-time">--:--</span> AM</div>
+                        <div class="sun-item"><i class="fa-solid fa-moon" style="color: #9ca3af;"></i> <span id="sunset-time">--:--</span> PM</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Hourly Forecast Container -->
-            <div class="forecast-container mb-4" style="background:white; border-left: 4px solid var(--primary-light);">
-                <h3 class="mb-4" style="color:var(--primary-dark); font-family:'Playfair Display'; font-size:1.5rem;"><i class="fa-solid fa-clock" style="color:#0ea5e9;"></i> 24-Hour Forecast</h3>
-                <div class="hourly-scroll-wrapper" style="overflow-x: auto; padding-bottom: 15px; scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent;">
-                    <div id="hourly-row" style="display: grid; grid-template-rows: auto auto auto; grid-auto-flow: column; gap: 1rem; width: max-content;">
-                        <!-- JS injected -->
-                        <div style="padding: 2rem; text-align: center; color: var(--text-muted); width: 100%;"><i class="fa-solid fa-spinner fa-spin"></i> Fetching hourly data...</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Deep 6-Day Forecast -->
-            <div class="forecast-container" style="background:white; grid-column: 1 / -1; border-top: 4px solid var(--primary-light);">
-                <h3 class="mb-4" style="color:var(--primary-dark); font-family:'Playfair Display'; font-size:1.5rem; text-align: center;">
-                    <i class="fa-regular fa-calendar-days" style="color:#0ea5e9; margin-right: 8px;"></i>Deep 6-Day Forecast & Precipitation
-                </h3>
-                <div class="forecast-row" id="forecast-row">
+            <!-- Deep 6-Day Forecast List -->
+            <div class="msn-forecast-panel glass-panel">
+                <div class="msn-panel-header"><i class="fa-regular fa-calendar-days" style="opacity:0.8;"></i> Daily Forecast</div>
+                <div class="msn-daily-list" id="forecast-row">
                     <!-- Populated natively by JS -->
-                    <div style="padding:2rem; width:100%; text-align:center; color:var(--text-muted);"><i class="fa-solid fa-circle-notch fa-spin"></i> Fetching meteorological arrays...</div>
+                    <div style="padding:2rem; width:100%; text-align:center; opacity:0.8;"><i class="fa-solid fa-circle-notch fa-spin"></i> Fetching meteorological arrays...</div>
+                </div>
+            </div>
+            
+            <!-- MSN Style Hourly Forecast -->
+            <div class="msn-forecast-panel glass-panel" style="grid-column: 1 / -1;">
+                <div class="msn-panel-header"><i class="fa-solid fa-clock" style="opacity:0.8;"></i> 24-Hour Forecast</div>
+                <div class="msn-hourly-scroll">
+                    <div id="hourly-row" class="msn-hourly-flex">
+                        <div style="padding: 2rem; width: 100%; text-align: center; opacity:0.8;"><i class="fa-solid fa-spinner fa-spin"></i> Fetching hourly data...</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -136,7 +142,7 @@ session_start();
     <!-- Footer -->
     <footer style="background:#1e293b; color:white; padding:3rem 0; margin-top:5rem;">
         <div class="container text-center">
-            <p style="color:#cbd5e1;">&copy; 2026 Grow Your Crops India. Built with Open-Meteo Meteorological Systems.</p>
+            <p style="color:#cbd5e1;">&copy; 2026 GROW YOUR CROPS. Built with Open-Meteo Meteorological Systems.</p>
         </div>
     </footer>
 

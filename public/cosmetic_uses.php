@@ -8,7 +8,7 @@ $is_logged_in = isset($_SESSION['user_id']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmetic Uses of Crops - Grow Your Crops India</title>
+    <title>Cosmetic Uses of Crops - GROW YOUR CROPS</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -85,7 +85,7 @@ $is_logged_in = isset($_SESSION['user_id']);
         <div class="container nav-container">
             <a href="index.html" class="logo">
                 <i class="fa-solid fa-leaf"></i>
-                <span>GrowYourCrops<span class="highlight">India</span></span>
+                <span>Grow Your Crops</span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -137,7 +137,7 @@ $is_logged_in = isset($_SESSION['user_id']);
 
     <footer>
         <div class="container text-center">
-            <p>&copy; 2026 Grow Your Crops India. Architecture powered by PHP & Python.</p>
+            <p>&copy; 2026 GROW YOUR CROPS. Architecture powered by PHP & Python.</p>
         </div>
     </footer>
 

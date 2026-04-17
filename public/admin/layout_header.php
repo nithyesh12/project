@@ -11,7 +11,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Grow Your Crops India</title>
+    <title>Admin Dashboard - GROW YOUR CROPS</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -64,7 +64,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <body>
     <aside class="sidebar">
         <a href="dashboard.php" class="sidebar-header">
-            <i class="fa-solid fa-seedling"></i> GrowYourCrops Admin
+            <i class="fa-solid fa-seedling"></i> Grow Your Crops Admin
         </a>
         <nav class="nav-links">
             <a href="dashboard.php" class="<?= $current_page == 'dashboard.php' ? 'active' : '' ?>">

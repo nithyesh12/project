@@ -9,6 +9,9 @@ class Database
     private $password = ""; // Update in production!
     public $conn;
 
+    /**
+     * @return \PDO|null
+     */
     public function getConnection()
     {
         $this->conn = null;

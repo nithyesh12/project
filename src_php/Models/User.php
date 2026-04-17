@@ -49,6 +49,9 @@ class User
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function emailExists()
     {
         $query = "SELECT id, first_name, last_name, password_hash
