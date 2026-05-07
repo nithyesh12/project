@@ -1,5 +1,3 @@
-SET FOREIGN_KEY_CHECKS=0;
-
 -- Run this script in your MySQL client / phpMyAdmin
 
 CREATE TABLE IF NOT EXISTS `admins` (
@@ -144,31 +142,3 @@ INSERT INTO `crops` (`id`, `crop_name`, `scientific_name`, `short_desc`, `image_
 (99, 'Aloe Vera', 'Aloe barbadensis miller', 'A cultivated Perennial crop known for its commercial and nutritional footprint in Indian agriculture.', 'assets/images/crops/aloe_vera.jpg', 6.5, 8.5, 20.0, 40.0, 30.0, 50.0, NULL, NULL, 'Perennial', 'Rajasthan, Gujarat, Maharashtra', 'Low'),
 (100, 'Cocoa', 'Theobroma cacao', 'A cultivated Perennial crop known for its commercial and nutritional footprint in Indian agriculture.', 'assets/images/crops/cocoa.jpg', 6.0, 7.5, 20.0, 30.0, 150.0, 250.0, NULL, NULL, 'Perennial', 'Kerala, Karnataka, TN', 'High'),
 (101, 'Chili Pepper', 'Capsicum annuum', 'A cultivated Kharif crop known for its commercial and nutritional footprint in Indian agriculture.', 'assets/images/crops/chilli_pepper.jpg', 6.0, 7.0, 20.0, 30.0, 60.0, 100.0, NULL, NULL, 'Kharif', 'AP, Telangana, MP, Karnataka', 'Medium');
-
-DROP TABLE IF EXISTS `pest_disease`;
-
-CREATE TABLE `pest_disease` (
-    `pest_id` INT(11) NOT NULL AUTO_INCREMENT,
-    `crop_id` INT(11) NOT NULL,
-    `pest_name` VARCHAR(255) NOT NULL,
-    `symptoms` TEXT NOT NULL,
-    `treatment` TEXT NOT NULL,
-    PRIMARY KEY (`pest_id`),
-    FOREIGN KEY (`crop_id`) REFERENCES `crops`(`id`) ON DELETE CASCADE
-);
-
--- Seed data for pests and diseases dynamically mapped to top crops for testing
-INSERT INTO `pest_disease` (`crop_id`, `pest_name`, `symptoms`, `treatment`) VALUES
-(1, 'Rice Stem Borer', 'Dead heart in vegetative stage and whiteheads in reproductive stage. Small holes visible on stems.', 'Apply Cartap Hydrochloride or Chlorantraniliprole 18.5 SC. Install pheromone traps (5/acre).'),
-(1, 'Rice Blast Disease', 'Spindle-shaped lesions with brown margins and gray centers on leaves and nodes.', 'Spray Tricyclazole 75 WP or Propiconazole at panicle initiation stage. Avoid excess Nitrogen.'),
-(2, 'Yellow Rust', 'Yellow pustules arranged in linear stripes on leaves, eventually covering the entire blade.', 'Spray Propiconazole 25 EC or Tebuconazole 25 WG at the first sign of symptoms.'),
-(2, 'Termites', 'Yellowing and wilting of plants in patches; roots and stems show hollowing with soil-filled galleries.', 'Treat seeds with Chlorpyriphos 20 EC before sowing. Apply Neem cake to the field.'),
-(3, 'Fall Armyworm', 'Irregular feeding holes on leaves. Presence of sawdust-like frass inside the whorl of the plant.', 'Apply Spinetoram 11.7 SC or Emamectin Benzoate 5 SG directly into the whorl. Introduce Trichogramma egg parasitoids.'),
-(22, 'Pink Bollworm', 'Rosetted flowers, premature shedding of buds, and feeding inside the boll causing rotting.', 'Use Bt cotton varieties. Install pheromone traps for monitoring. Spray Quinalphos or Thiodicarb.'),
-(22, 'Cotton Whitefly', 'Yellowing of leaves, upward curling, and presence of sticky honeydew. Vector for leaf curl virus.', 'Spray Neem oil (1500 ppm) or Flonicamid 50 WG. Yellow sticky traps (10-15/acre).'),
-(47, 'Tomato Early Blight', 'Brown to black necrotic spots with concentric rings on older leaves, causing defoliation.', 'Spray Mancozeb or Chlorothalonil early in the season. Ensure good spacing for air circulation.'),
-(47, 'Fruit Borer', 'Caterpillars bore into developing fruit, making them unmarketable. Large entry holes visible.', 'Apply Indoxacarb 14.5 SC or Flubendiamide 480 SC. Pick and destroy infested fruits.'),
-(40, 'Mango Hopper', 'Nymphs and adults suck sap from tender shoots and inflorescence, causing flower drop and honeydew mold.', 'Spray Imidacloprid 17.8 SL or Thiamethoxam 25 WG during pre-bloom and post-bloom stages.'),
-(43, 'Apple Scab', 'Olive-green spots on leaves turning brown and corky. Fruit develops dark, velvety lesions and cracks.', 'Apply Captan or Mancozeb prophylactically. Manage fallen leaves aggressively by burning or deep plowing.');
-
-SET FOREIGN_KEY_CHECKS=1;

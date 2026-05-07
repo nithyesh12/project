@@ -12,12 +12,12 @@ CREATE TABLE IF NOT EXISTS crop_cosmetics (
 -- Safely ensure we have some cosmetic crops in the main crops table
 INSERT IGNORE INTO crops (crop_name, image_url, short_desc) VALUES 
 ('Turmeric', 'assets/images/crops/turmeric.jpg', 'A bright yellow spice with powerful anti-inflammatory properties.'),
-('Aloe Vera', 'assets/images/crops/default.jpg', 'A succulent plant widely used in cosmetics and alternative medicine.'),
+('Aloe Vera', 'assets/images/crops/aloe_vera.jpg', 'A succulent plant widely used in cosmetics and alternative medicine.'),
 ('Coconut', 'assets/images/crops/coconut.jpg', 'A versatile palm tree producing coconuts, widely used for its water, milk, and oil.'),
-('Neem', 'assets/images/crops/default.jpg', 'A fast-growing tree with renowned medicinal and skincare properties.'),
+('Neem', 'assets/images/crops/neem.jpg', 'A fast-growing tree with renowned medicinal and skincare properties.'),
 ('Papaya', 'assets/images/crops/papaya.jpeg', 'A tropical fruit rich in enzymes and widely used in skin routines.'),
-('Sandalwood', 'assets/images/crops/default.jpg', 'A fragrant wood prized for its essential oil and cosmetic benefits.'),
-('Rose', 'assets/images/crops/default.jpg', 'A beautiful flower famous for its essential oils and rose water.'),
+('Sandalwood', 'assets/images/crops/sandalwood.jpg', 'A fragrant wood prized for its essential oil and cosmetic benefits.'),
+('Rose', 'assets/images/crops/rose.jpg', 'A beautiful flower famous for its essential oils and rose water.'),
 ('Rice', 'assets/images/crops/rice.jpg', 'A staple grain that also has remarkable skin-brightening properties.');
 
 -- Insert cosmetic data by dynamically looking up the crop IDs

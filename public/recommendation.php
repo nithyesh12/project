@@ -183,21 +183,6 @@ if (!isset($_SESSION['user_id'])) {
                     
                     <div id="dynamic-results-container" style="display: flex; flex-direction: column; gap: 1rem;">
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Pest & Disease Modal -->
-        <div id="pest-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
-            <div style="background: white; border-radius: 12px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 2rem; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
-                <button onclick="closePestModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;"><i class="fa-solid fa-xmark"></i></button>
-                <h3 id="pest-modal-title" style="color: var(--primary-dark); margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;"><i class="fa-solid fa-bug"></i> Pest & Disease Info</h3>
-                <div id="pest-modal-content">
-                    <div style="text-align: center; color: #64748b; padding: 2rem;"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p>Loading data...</p></div>
-                </div>
-            </div>
-        </div>
-    </main>
 
     <script>
         document.getElementById('recommendation-form').addEventListener('submit', async function(e) {
@@ -255,9 +240,6 @@ if (!isset($_SESSION['user_id'])) {
                             <div style="margin-top: 1rem; background: #e2e8f0; height: 8px; border-radius: 4px; overflow: hidden;">
                                 <div style="width: ${item.match_score}%; background: ${colorClass}; height: 100%;"></div>
                             </div>
-                            <div style="margin-top: 1rem; text-align: right;">
-                                <button onclick="openPestModal('${item.crop}')" style="background: #e11d48; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.85rem; cursor: pointer; transition: 0.2s;"><i class="fa-solid fa-magnifying-glass-chart"></i> View Pest & Disease Info</button>
-                            </div>
                         </div>`;
                     });
 
@@ -282,50 +264,6 @@ if (!isset($_SESSION['user_id'])) {
             btn.innerHTML = '<span>Analyze Land Suitability</span><i class="fa-solid fa-wand-magic-sparkles"></i>';
             btn.disabled = false;
         });
-
-        // Pest Modal Logic
-        function closePestModal() {
-            document.getElementById('pest-modal').style.display = 'none';
-        }
-
-        async function openPestModal(cropName) {
-            const modal = document.getElementById('pest-modal');
-            const content = document.getElementById('pest-modal-content');
-            const title = document.getElementById('pest-modal-title');
-            
-            modal.style.display = 'flex';
-            title.innerHTML = `<i class="fa-solid fa-bug"></i> Pest & Disease for ${cropName}`;
-            content.innerHTML = `<div style="text-align: center; color: #64748b; padding: 2rem;"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p>Loading data...</p></div>`;
-            
-            try {
-                const response = await fetch(`api/get-pest-disease.php?crop_name=${encodeURIComponent(cropName)}`);
-                const res = await response.json();
-                
-                if(response.ok && res.data && res.data.length > 0) {
-                    let html = '<div style="display:flex; flex-direction:column; gap:1rem;">';
-                    res.data.forEach(item => {
-                        html += `
-                        <div style="border: 1px solid #fda4af; border-left: 4px solid #e11d48; border-radius: 8px; padding: 1rem; background: #fff1f2;">
-                            <h4 style="color: #9f1239; margin-bottom: 0.5rem; font-size: 1.1rem;"><i class="fa-solid fa-triangle-exclamation"></i> ${item.pest_name}</h4>
-                            <div style="margin-bottom: 0.5rem;">
-                                <strong style="color: #be123c; font-size: 0.9rem;">Symptoms:</strong>
-                                <p style="margin: 0; font-size: 0.9rem; color: #4c0519;">${item.symptoms}</p>
-                            </div>
-                            <div>
-                                <strong style="color: #059669; font-size: 0.9rem;">Treatment:</strong>
-                                <p style="margin: 0; font-size: 0.9rem; color: #064e3b;">${item.treatment}</p>
-                            </div>
-                        </div>`;
-                    });
-                    html += '</div>';
-                    content.innerHTML = html;
-                } else {
-                    content.innerHTML = `<div style="text-align:center; padding:2rem; color:#94a3b8;"><i class="fa-solid fa-leaf fa-2x" style="margin-bottom:1rem;"></i><p>No specific pest or disease data logged for ${cropName} yet.</p></div>`;
-                }
-            } catch(e) {
-                content.innerHTML = `<div style="color: #991b1b; text-align: center;"><i class="fa-solid fa-triangle-exclamation"></i> Error loading data. Please try again.</div>`;
-            }
-        }
         // Logout function
         async function logout() {
             try {
